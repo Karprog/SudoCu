@@ -6,10 +6,19 @@
 #define _CRT_SECURE_NO_DEPRECATE 1
 #define DATABASE_FILE "benutzerverwaltung.sqlite3"
 
+char countReturn;
+
+static int callback (void *data, int argc, char **argv, char **colName)
+{
+    printf("\n%s\n", argv[0]);
+    countReturn = *argv[0];
+    return 0;
+}
+
 /*Schreibt die Nutzerdaten in die Datenbank. Wenn dies
 gelingt, wird dem User angegeben, dass der Registrierungsvorgang
 erfolgreich war. Wenn nicht, wird eine Fehlermeldung ausgegeben.*/
-int mainTestmain(void)
+int mainNutzerInDb()
 {
     /*Variablendeklaration*/
     sqlite3 *db_handle;
@@ -17,36 +26,30 @@ int mainTestmain(void)
     int control;
     char* sql;
     char* errormsg;
-    char nutzername[30] = "spfleid";
-    char passwort[20] = "abcdefg";
+    char nutzername[30] = "testnutzer";
+    char passwort[20] = "testpasswort";
+
+    /*char nutzername[30] = "michGibt es nicht";
+    char passwort[20] = "gibtEsNicht";*/
 
     /*Öffnen der Datenbankverbindung*/
     rc = sqlite3_open(DATABASE_FILE, &db_handle);
 
-    /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
-    sql = sqlite3_mprintf("INSERT INTO nutzerdaten (nutzername, passwort) VALUES ('%s', '%s')",
-                          nutzername, passwort);
-
-    printf(sql);
+    if (rc == 0) {
+        /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
+        sql = sqlite3_mprintf("SELECT COUNT(*) FROM nutzerdaten WHERE benutzername = '%s' AND passwort = '%s';",
+                            nutzername, passwort);
+    }
 
     /*Ausführen der Query auf der Datenbank*/
-    control = sqlite3_exec(db_handle, sql, NULL, NULL, &errormsg);
-    printf("\n%d\n", control);
+    control = sqlite3_exec(db_handle, sql, callback, NULL, &errormsg);
 
     /*Fehlermeldung bei fehlgeschlagener Ausführung,
     Freigabe der Verbindungsressourcen*/
-    if (rc != SQLITE_OK) {
+    if (rc != SQLITE_OK || control != 0) {
         printf("SQL-Fehler: %s\n", errormsg);
 		sqlite3_free(errormsg);
 		return -1;
-    }
-    else {
-        printf(
-               "\nSie wurden in das System aufgenommen und koennen "
-               );
-        printf(
-               "sich nun mit Ihren Zugangsdaten anmelden\n"
-               );
     }
 
     sqlite3_close(db_handle);

@@ -9,7 +9,7 @@
 /*Schreibt die Nutzerdaten in die Datenbank. Wenn dies
 gelingt, wird dem User angegeben, dass der Registrierungsvorgang
 erfolgreich war. Wenn nicht, wird eine Fehlermeldung ausgegeben.*/
-int mainTestmain(void)
+int main(void)
 {
     /*Variablendeklaration*/
     sqlite3 *db_handle;
@@ -17,25 +17,29 @@ int mainTestmain(void)
     int control;
     char* sql;
     char* errormsg;
-    char nutzername[30] = "spfleid";
-    char passwort[20] = "abcdefg";
+    int nutzerId = 12;
+    char schwierigkeitsgrad[20] = "Mittel";
+    int punktzahl = 123;
+    char zeit[10] = "12:45";
 
     /*Öffnen der Datenbankverbindung*/
     rc = sqlite3_open(DATABASE_FILE, &db_handle);
 
-    /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
-    sql = sqlite3_mprintf("INSERT INTO nutzerdaten (nutzername, passwort) VALUES ('%s', '%s')",
-                          nutzername, passwort);
-
-    printf(sql);
+    if (rc == 0) {
+        /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
+        sql = sqlite3_mprintf("INSERT INTO bestenliste (benutzerId, schwierigkeitsgrad, punktzahl, zeit) VALUES ('%s', '%s', '%s', '%s')",
+                            nutzerId, schwierigkeitsgrad, punktzahl, zeit);
+    }
+    else {
+        printf("Es konnte keine Verbindung zur Datenbank aufgebaut werden.");
+    }
 
     /*Ausführen der Query auf der Datenbank*/
     control = sqlite3_exec(db_handle, sql, NULL, NULL, &errormsg);
-    printf("\n%d\n", control);
 
     /*Fehlermeldung bei fehlgeschlagener Ausführung,
     Freigabe der Verbindungsressourcen*/
-    if (rc != SQLITE_OK) {
+    if (rc != SQLITE_OK || control != 0) {
         printf("SQL-Fehler: %s\n", errormsg);
 		sqlite3_free(errormsg);
 		return -1;
