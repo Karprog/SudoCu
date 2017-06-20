@@ -23,7 +23,7 @@ typedef struct{
 } SUDOKU;
 SUDOKU spiel;
 
-int mainLogik(){
+int Logik(){
     int k;
     srand(time(NULL));
 
@@ -381,59 +381,63 @@ void SudokuAusgeben(){
     }
     */
 
-    printf( "Zeile 1 links      " \
+    printf( "                                  " \
             "%.79s     " \
-            "Zeile 1 rechts\n" \
-            "Zeile 2 links      " \
+            "\n" \
+            " SudoCu Version 4.4Alpha          " \
             "%.79s     " \
             "Zeile 2 rechts\n", cTopline, cEmptyline);
     for(i=0; i<9; i++){
         for(l=0; l<3; l++){
             switch(i){
                 case 0: switch(l){
-                    case 0: printf("Zeile 3 links      "); break;
-                    case 1: printf("Zeile 4 links      "); break;
-                    case 2: printf("Zeile 5 links      "); break;
+                    case 0: printf("                                  "); break;
+                    case 1: printf("                                1 "); break;
+                    case 2: printf("                                  "); break;
                 } break;
                 case 1: switch(l){
-                    case 0: printf("Zeile 7 links      "); break;
-                    case 1: printf("Zeile 8 links      "); break;
-                    case 2: printf("Zeile 9 links      "); break;
+                    case 0: printf(" Das Ziel ist es, die leeren      "); break;
+                    case 1: printf(" Zellen im Spielfeld mit den    2 "); break;
+                    case 2: printf(" Ziffern 1 bis 9 wie folgt        "); break;
                 } break;
                 case 2: switch(l){
-                    case 0: printf("Zeile 11 links     "); break;
-                    case 1: printf("Zeile 12 links     "); break;
-                    case 2: printf("Zeile 13 links     "); break;
+                    case 0: printf("                                  "); break;
+                    case 1: printf("                                  "); break;
+                    case 2: printf(" -In jeder Spalte kommt jede      "); break;
                 } break;
                 case 3: switch(l){
-                    case 0: printf("Zeile 17 links     "); break;
-                    case 1: printf("Zeile 18 links     "); break;
-                    case 2: printf("Zeile 19 links     "); break;
+                    case 0: printf(" -In jeder Zeile kommt jede       "); break;
+                    case 1: printf("  Zahl nur einmal vor             "); break;
+                    case 2: printf("                                  "); break;
                 } break;
                 case 4: switch(l){
-                    case 0: printf("Zeile 21 links     "); break;
-                    case 1: printf("Zeile 22 links     "); break;
-                    case 2: printf("Zeile 23 links     "); break;
+                    case 0: printf(" -In jedem 3 x 3 Quadranten       "); break;
+                    case 1: printf("  kommt jede Zahl nur einmal      "); break;
+                    case 2: printf("  vor.                            "); break;
                 } break;
                 case 5: switch(l){
-                    case 0: printf("Zeile 25 links     "); break;
-                    case 1: printf("Zeile 26 links     "); break;
-                    case 2: printf("Zeile 27 links     "); break;
+                    // 25 links
+                    case 0: printf("                                  "); break;
+                    case 1: printf("                                  "); break;
+                    case 2: printf("                                  "); break;
                 } break;
                 case 6: switch(l){
-                    case 0: printf("Zeile 31 links     "); break;
-                    case 1: printf("Zeile 32 links     "); break;
-                    case 2: printf("Zeile 33 links     "); break;
+                    //31 links
+                    case 0: printf("                                  "); break;
+                    case 1: printf("                                  "); break;
+                    case 2: printf("                                  "); break;
                 } break;
                 case 7: switch(l){
-                    case 0: printf("Zeile 35 links     "); break;
-                    case 1: printf("Zeile 36 links     "); break;
-                    case 2: printf("Zeile 37 links     "); break;
+                    //35 links
+                    case 0: printf("                                  "); break;
+                    case 1: printf("                                  "); break;
+                    case 2: printf("                                  "); break;
                 } break;
                 case 8: switch(l){
-                    case 0: printf("Zeile 39 links     "); break;
-                    case 1: printf("Zeile 40 links     "); break;
-                    case 2: printf("Zeile 41 links     "); break;
+                    //39 links
+                    case 0: printf("                                  "); break;
+                    case 1: printf("                                  "); break;
+                    case 2: printf("                                  "); break;
                 } break;
             }
             printf("%c  ", '\xB3');
@@ -554,54 +558,62 @@ void SudokuAusgeben(){
                 } break;
             }
             if(l==2 && i==0){
-                printf( "\nZeile 6 links      " \
+                printf( "\n                                  " \
                         "%.79s     " \
                         "Zeile 6 rechts", cWeakline);
             }else if(l==2 && i==1){
-                printf( "\nZeile 10 links     " \
+                printf( "\n auszufuellen.                    " \
                         "%.79s     " \
                         "Zeile 10 rechts", cWeakline);
             }else if(l==2 &&i==2){
-                printf( "\nZeile 14 links     " \
+                printf( "\n  Zahl nur einmal vor             " \
                         "%.79s     " \
                         "Zeile 14 rechts\n" \
-                        "Zeile 15 links     " \
+                        "                                  " \
                         "%.79s     " \
                         "Zeile 15 rechts\n" \
-                        "Zeile 16 links     " \
+                        "                                  " \
                         "%.79s     " \
                         "Zeile 16 rechts", cEmptyline, cStrongline, cEmptyline);
             }else if(l==2 && i==3){
-                printf( "\nZeile 20 links     " \
+                printf( "\n                                  " \
                         "%.79s     " \
                         "Zeile 20 rechts", cWeakline);
             }else if(l==2 && i==4){
-                printf( "\nZeile 24 links     " \
+                // 24 links
+                printf( "\n                                  " \
                         "%.79s     " \
                         "Zeile 24 rechts", cWeakline);
             }else if(l==2 && i==5){
-                printf( "\nZeile 28 links     " \
+                // 28 links
+                printf( "\n                                  " \
                         "%.79s     " \
                         "Zeile 28 rechts\n" \
-                        "Zeile 29 links     " \
+                        // 29 links
+                        "                                  " \
                         "%.79s     " \
                         "Zeile 29 rechts\n" \
-                        "Zeile 30 links     " \
+                        // 30 links
+                        "                                  " \
                         "%.79s     " \
                         "Zeile 30 rechts", cEmptyline, cStrongline, cEmptyline);
             }else if(l==2 && i==6){
-                printf( "\nZeile 34 links     " \
+                // 34 links
+                printf( "\n                                  " \
                         "%.79s     " \
                         "Zeile 34 rechts", cWeakline);
             }else if(l==2 && i==7){
-                printf( "\nZeile 38 links     " \
+                // 38 links
+                printf( "\n                                  " \
                         "%.79s     " \
                         "Zeile 38 rechts", cWeakline);
             }else if(l==2 && i==8){
-                printf( "\nZeile 42 links     " \
+                // 42 links
+                printf( "\n                                  " \
                         "%.79s     " \
                         "Zeile 42 rechts\n" \
-                        "Zeile 43 links     " \
+                        // 43 links
+                        "                                  " \
                         "%.79s     " \
                         "Zeile 43 rechts\n", cEmptyline, cBottomline);
             }

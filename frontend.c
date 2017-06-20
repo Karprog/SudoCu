@@ -14,6 +14,7 @@ int Registrieren();
 
 int mainFrontend()
 {
+
     Hauptmenue();
     return 0;
 }
@@ -276,7 +277,7 @@ char Schwierigkeit()
     switch(auswahl)
     {
         case '1':
-
+            Logik();
             break;
         case '2':
 
