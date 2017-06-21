@@ -9,7 +9,7 @@
 /*Schreibt die Nutzerdaten in die Datenbank. Wenn dies
 gelingt, wird dem User angegeben, dass der Registrierungsvorgang
 erfolgreich war. Wenn nicht, wird eine Fehlermeldung ausgegeben.*/
-int mainNutzerVonDb(void)
+int mainNutzerVonDb(char *nutzername, char *passwort)
 {
     /*Variablendeklaration*/
     sqlite3 *db_handle;
@@ -17,15 +17,15 @@ int mainNutzerVonDb(void)
     int control;
     char* sql;
     char* errormsg;
-    char nutzername[30] = "testnutzer";
-    char passwort[20] = "testpasswort";
+    //char nutzername[30] = "testnutzer";
+    //char passwort[20] = "testpasswort";
 
     /*Öffnen der Datenbankverbindung*/
     rc = sqlite3_open(DATABASE_FILE, &db_handle);
 
     if (rc == 0) {
         /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
-        sql = sqlite3_mprintf("INSERT INTO nutzerdaten (benutzername, passwort) VALUES ('%s', '%s')",
+        sql = sqlite3_mprintf("INSERT INTO nutzerdaten (nutzername, passwort) VALUES ('%s', '%s')",
                             nutzername, passwort);
     }
     else {
@@ -40,6 +40,7 @@ int mainNutzerVonDb(void)
     if (rc != SQLITE_OK || control != 0) {
         printf("SQL-Fehler: %s\n", errormsg);
 		sqlite3_free(errormsg);
+		system("pause");
 		return -1;
     }
     else {
@@ -52,6 +53,5 @@ int mainNutzerVonDb(void)
     }
 
     sqlite3_close(db_handle);
-    system("pause");
     return 0;
 }

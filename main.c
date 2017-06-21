@@ -70,6 +70,7 @@ void test(){
     HilfsfelderSetzen();
 
     SudokuAusgeben();
+    printf("                                       1       2       3         4       5       6         7       8       9\n\n");
 
     do{
         printf("Bitte geben Sie PositionX ein:");
@@ -402,41 +403,41 @@ void SudokuAusgeben(){
                 } break;
                 case 2: switch(l){
                     case 0: printf("                                  "); break;
-                    case 1: printf("                                  "); break;
+                    case 1: printf("                                3 "); break;
                     case 2: printf(" -In jeder Spalte kommt jede      "); break;
                 } break;
                 case 3: switch(l){
                     case 0: printf(" -In jeder Zeile kommt jede       "); break;
-                    case 1: printf("  Zahl nur einmal vor             "); break;
+                    case 1: printf("  Zahl nur einmal vor           4 "); break;
                     case 2: printf("                                  "); break;
                 } break;
                 case 4: switch(l){
                     case 0: printf(" -In jedem 3 x 3 Quadranten       "); break;
-                    case 1: printf("  kommt jede Zahl nur einmal      "); break;
+                    case 1: printf("  kommt jede Zahl nur einmal    5 "); break;
                     case 2: printf("  vor.                            "); break;
                 } break;
                 case 5: switch(l){
                     // 25 links
                     case 0: printf("                                  "); break;
-                    case 1: printf("                                  "); break;
+                    case 1: printf("                                6 "); break;
                     case 2: printf("                                  "); break;
                 } break;
                 case 6: switch(l){
                     //31 links
                     case 0: printf("                                  "); break;
-                    case 1: printf("                                  "); break;
+                    case 1: printf("                                7 "); break;
                     case 2: printf("                                  "); break;
                 } break;
                 case 7: switch(l){
                     //35 links
                     case 0: printf("                                  "); break;
-                    case 1: printf("                                  "); break;
+                    case 1: printf("                                8 "); break;
                     case 2: printf("                                  "); break;
                 } break;
                 case 8: switch(l){
                     //39 links
                     case 0: printf("                                  "); break;
-                    case 1: printf("                                  "); break;
+                    case 1: printf("                                9 "); break;
                     case 2: printf("                                  "); break;
                 } break;
             }

@@ -9,7 +9,7 @@
 /*Schreibt die Nutzerdaten in die Datenbank. Wenn dies
 gelingt, wird dem User angegeben, dass der Registrierungsvorgang
 erfolgreich war. Wenn nicht, wird eine Fehlermeldung ausgegeben.*/
-int main(void)
+int BestenlisteSchreibenUnit(void)
 {
     /*Variablendeklaration*/
     sqlite3 *db_handle;

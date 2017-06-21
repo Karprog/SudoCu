@@ -18,7 +18,7 @@ static int callback (void *data, int argc, char **argv, char **colName)
 /*Schreibt die Nutzerdaten in die Datenbank. Wenn dies
 gelingt, wird dem User angegeben, dass der Registrierungsvorgang
 erfolgreich war. Wenn nicht, wird eine Fehlermeldung ausgegeben.*/
-int mainNutzerInDb()
+char mainNutzerInDb(char *nutzername, char *passwort)
 {
     /*Variablendeklaration*/
     sqlite3 *db_handle;
@@ -26,8 +26,8 @@ int mainNutzerInDb()
     int control;
     char* sql;
     char* errormsg;
-    char nutzername[30] = "testnutzer";
-    char passwort[20] = "testpasswort";
+    //char nutzername[30] = "testnutzer";
+    //char passwort[20] = "testpasswort";
 
     /*char nutzername[30] = "michGibt es nicht";
     char passwort[20] = "gibtEsNicht";*/
@@ -37,7 +37,7 @@ int mainNutzerInDb()
 
     if (rc == 0) {
         /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
-        sql = sqlite3_mprintf("SELECT COUNT(*) FROM nutzerdaten WHERE benutzername = '%s' AND passwort = '%s';",
+        sql = sqlite3_mprintf("SELECT COUNT(*) FROM nutzerdaten WHERE nutzername = '%s' AND passwort = '%s';",
                             nutzername, passwort);
     }
 
@@ -53,6 +53,5 @@ int mainNutzerInDb()
     }
 
     sqlite3_close(db_handle);
-    system("pause");
-    return 0;
+    return countReturn;
 }

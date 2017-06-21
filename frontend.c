@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <zeit.h>
+#include <string.h>
 
 char Login();
 char Hauptmenue();
@@ -11,6 +11,8 @@ char Schwierigkeit();
 
 int Anmelden();
 int Registrieren();
+
+char NUTZERNAME[40];
 
 int mainFrontend()
 {
@@ -26,9 +28,9 @@ char Hauptmenue()
         do
         {
             system("cls");
-
             printf("\n");
-            printf(" SudoCu Version 4.4Alpha                                                                                            Steuerung:  \n");
+            printf(" SudoCu Version 4.4Alpha\n\n\n");
+            printf("\n\n                                                                                                                    Steuerung:  \n");
             printf("\n");
             printf(" Das Ziel ist es, die leeren                                                                                         R = Nachladen\n");
             printf(" Zellen im Spielfeld mit den                                         SudoCo!                                         T = Flashlight\n");
@@ -57,6 +59,7 @@ char Hauptmenue()
                 Login();
                 break;
             case 'b':
+               strcpy(NUTZERNAME,"Gast");
                Schwierigkeit();
                 break;
             case 'c':
@@ -80,7 +83,8 @@ char Login()
     {
         system("cls");
         printf("\n");
-        printf(" SudoCu Version 4.4Alpha                                                                                            Steuerung:  \n");
+        printf(" SudoCu Version 4.4Alpha\n\n\n");
+        printf("\n\n                                                                                                                    Steuerung:  \n");
         printf("\n");
         printf(" Das Ziel ist es, die leeren                                                                                         R = Nachladen\n");
         printf(" Zellen im Spielfeld mit den                                          Login                                          T = Flashlight\n");
@@ -127,39 +131,45 @@ int Anmelden()
     char username[40];
     char passwort[40];
     int i = 0;
+    int erfolgreich=0;
 
+    do
+    {
+        system("cls");
+        printf("\n");
+        printf(" SudoCu Version 4.4Alpha\n\n\n");
+        printf("\n\n                                                                                                                    Steuerung:  \n");
+        printf("\n");
+        printf(" Das Ziel ist es, die leeren                                                                                         R = Nachladen\n");
+        printf(" Zellen im Spielfeld mit den                                         Anmeldung                                       T = Flashlight\n");
+        printf(" Ziffern 1 bis 9 wie folgt                                                                                           Q = Questlog\n");
+        printf(" auszufüllen.                                                                                                        P = Skillbaum\n");
+        printf("                                                                 Geben Sie erst Name                                 G = Granate\n");
+        printf(" -In jeder Spalte kommt jede                                                                                         C = Charakterinformationen\n");
+        printf("  Zahl nur einmal vor                                           und dann Passwort ein                                B = Inventar\n");
+        printf("                                                                                                                     M = Map\n");
+        printf(" -In jeder Zeile kommt jede                                                                                          U = Dungeonfinder\n");
+        printf("  Zahl nur einmal vor\n");
+        printf("\n");
+        printf(" -In jedem 3 x 3 Quadranten\n");
+        printf("  kommt jede Zahl nur einmal\n");
+        printf("  vor.");
+        printf(" \n\n\n");
 
-    system("cls");
-    printf("\n");
-    printf(" SudoCu Version 4.4Alpha                                                                                            Steuerung:  \n");
-    printf("\n");
-    printf(" Das Ziel ist es, die leeren                                                                                         R = Nachladen\n");
-    printf(" Zellen im Spielfeld mit den                                         Anmeldung                                       T = Flashlight\n");
-    printf(" Ziffern 1 bis 9 wie folgt                                                                                           Q = Questlog\n");
-    printf(" auszufüllen.                                                                                                        P = Skillbaum\n");
-    printf("                                                                 Geben Sie erst Name                                 G = Granate\n");
-    printf(" -In jeder Spalte kommt jede                                                                                         C = Charakterinformationen\n");
-    printf("  Zahl nur einmal vor                                           und dann Passwort ein                                B = Inventar\n");
-    printf("                                                                                                                     M = Map\n");
-    printf(" -In jeder Zeile kommt jede                                                                                          U = Dungeonfinder\n");
-    printf("  Zahl nur einmal vor\n");
-    printf("\n");
-    printf(" -In jedem 3 x 3 Quadranten\n");
-    printf("  kommt jede Zahl nur einmal\n");
-    printf("  vor.");
-    printf(" \n\n\n");
+        printf(" Benutzername: ");
+        scanf("%s", &username);
 
-    printf(" Benutzername: ");
-    scanf("%s", &username);
+        printf(" Passwort: ");
+        scanf("%s", &passwort);
 
-    printf(" Passwort: ");
-    scanf("%s", &passwort);
+        erfolgreich = mainNutzerInDb(username, passwort);
 
-    //Hier Stefanies Methode !
+    }while(erfolgreich == '0');
 
-    //prüfe übereinstimmungs
+    strcpy(NUTZERNAME, username);
 
     Schwierigkeit();
+
     return 0;
 }
 
@@ -173,7 +183,8 @@ int Registrieren()
     system("cls");
 
     printf("\n");
-    printf(" SudoCu Version 4.4Alpha                                                                                            Steuerung:  \n");
+    printf(" SudoCu Version 4.4Alpha\n\n\n");
+    printf("\n\n                                                                                                                    Steuerung:  \n");
     printf("\n");
     printf(" Das Ziel ist es, die leeren                                                                                         R = Nachladen\n");
     printf(" Zellen im Spielfeld mit den                                        Registrierung                                    T = Flashlight\n");
@@ -199,6 +210,7 @@ int Registrieren()
     scanf("%s", &passwort);
 
     //Hier Daten an Stefanies Methode !
+    mainNutzerVonDb(username, passwort);
 
     // SPielstart
     Schwierigkeit();
@@ -213,9 +225,9 @@ char Bestenliste()
     do
     {
         system("cls");
-
         printf("\n");
-        printf(" SudoCu Version 4.4Alpha                                                                                            Steuerung:  \n");
+        printf(" SudoCu Version 4.4Alpha\n\n\n");
+        printf("\n\n                                                                                                                    Steuerung:  \n");
         printf("\n");
         printf(" Das Ziel ist es, die leeren                                                                                         R = Nachladen\n");
         printf(" Zellen im Spielfeld mit den                                       Bestenliste                                       T = Flashlight\n");
@@ -251,7 +263,9 @@ char Schwierigkeit()
     {
         system("cls");
         printf("\n");
-        printf(" SudoCu Version 4.4Alpha                                                                                            Steuerung:  \n");
+        printf(" SudoCu Version 4.4Alpha\n\n\n");
+        printf(" Benutzername: %s", NUTZERNAME);
+        printf("\n\n                                                                                                                    Steuerung:  \n");
         printf("\n");
         printf(" Das Ziel ist es, die leeren                                                                                         R = Nachladen\n");
         printf(" Zellen im Spielfeld mit den                                     Schwierigkeitsgrad                                  T = Flashlight\n");
@@ -280,10 +294,10 @@ char Schwierigkeit()
             Logik();
             break;
         case '2':
-
+            Logik();
             break;
         case '3':
-
+            Logik();
             break;
         case 'x':
             Hauptmenue();
