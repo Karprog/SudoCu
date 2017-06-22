@@ -1,15 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "Zeit.h"
+#include "Punkte.h"
 
 void AnfangsfelderGenerieren();                                                         //Generierung
 void KandidatenGenerieren();                                                            //Spielfunktion
 int KandidatEintragenEntfernen(int iPositionY, int iPositionX, int iZahl);              //Spielfunktion
 int KomplettPruefen(int *iPointer);                                                     //Hilfsfunktion
 int KomplettRichtigPruefen();                                                           //Hilfsfunktion
+int LoesungEintragen(int iPositionY, int iPositionX);                                  //Spielfunktion
 void LoesungFinden(int iPositionY, int iPositionX);                                     //Generierung
 void LoesungGenerieren(int iPositionY, int iPositionX);                                 //Generierung
-int Logik(int iSchwierigkeitsgrad);                                                     //Spielfunktion
+void Logik(int iSchwierigkeitsgrad);                                                     //Spielfunktion
 void PositionSetzen(int *iPositionY, int *iPositionX);                                  //Hilfsfunktion
 void SudokuAusgeben();                                                                  //Ein-/Ausgabe
 void SudokuErstellen(int iSchwierigkeitsgrad);                                          //Generierung
@@ -28,7 +31,7 @@ typedef struct{
 } SUDOKU;
 SUDOKU spiel;
 
-int Logik(int iSchwierigkeitsgrad){
+void Logik(int iSchwierigkeitsgrad){
     int k;
     srand(time(NULL));
 
@@ -43,14 +46,12 @@ int Logik(int iSchwierigkeitsgrad){
     }
 
     SudokuSpielen();
-
-    return k;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: SudokuErstellen()                                               *
  * Parameter: none                                                           *
- * Rückgabewert: none                                                        *
+ * RÃ¼ckgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void SudokuErstellen(int iSchwierigkeitsgrad){
     int i, j;
@@ -82,47 +83,63 @@ void SudokuErstellen(int iSchwierigkeitsgrad){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: SudokuSpielen()                                                 *
  * Parameter: none                                                           *
- * Rückgabewert: none                                                        *
+ * RÃ¼ckgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void SudokuSpielen(){
-    int iPositionX, iPositionY, iZahl, iModus;
+    int iPositionX, iPositionY, iZahl, iAbbrechen=0;
+    char cModus;
 
     SudokuAusgeben();
 
     do{
-        printf("Kugelschreiber(0) oder Bleistift(1) oder Lösung an Position(2) oder Kandidaten(3):");
-        scanf("%i", &iModus);
+        printf("Was moechten Sie tun?");
+        scanf("%c", &cModus);
 
-        if(iModus==0 || iModus==1 || iModus==2){
+        if(cModus== '0' || cModus== '1' || cModus== '2'){
             printf("Bitte geben Sie PositionX ein:");
             scanf("%i", &iPositionX);
 
             printf("Bitte geben Sie PositionY ein:");
             scanf("%i", &iPositionY);
-            if(iModus==0 || iModus==1){
+            if(cModus== '0' || cModus== '1'){
                 printf("Bitte geben Sie die Zahl ein:");
                 scanf("%i", &iZahl);
-                if(iModus==0){
+                if(cModus== '0'){
                     ZahlEintragen(iPositionY, iPositionX, iZahl);
-                }else if(iModus==1){
+                }else if(cModus== '1' ){
                     KandidatEintragenEntfernen(iPositionY, iPositionX, iZahl);
                 }
-            }else{
+            }
+            else{
                 LoesungEintragen(iPositionY, iPositionX);
             }
-        }else if(iModus==3){
+        }
+        else if(cModus== '3'){
             KandidatenGenerieren();
+        }
+        else if(cModus== 'x'){
+            iAbbrechen = 1;
+        }
+        else if(cModus== 'q'){
+            exit(0);
+        }
+        else if(cModus== 'b'){
+            Bestenliste(1);
         }
 
         SudokuAusgeben();
+    }while(!KomplettRichtigPruefen() && iAbbrechen==0);
 
-    }while(!KomplettRichtigPruefen());
+    if(iAbbrechen==0){
+        Bestenliste();
+    }
+
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: SudokuInitialisieren()                                          *
  * Parameter: none                                                           *
- * Rückgabewert: none                                                        *
+ * RÃ¼ckgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void SudokuInitialisieren(){
     int i, j, k;
@@ -144,7 +161,7 @@ void SudokuInitialisieren(){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: ZufallszahlGenerieren()                                         *
  * Parameter: int iVon, int iBis                                             *
- * Rückgabewert: int iZufallszahl                                            *
+ * RÃ¼ckgabewert: int iZufallszahl                                            *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int ZufallszahlGenerieren(int iVon, int iBis){
     int iZufallszahl = rand()%(iBis+1-iVon)+iVon;
@@ -154,7 +171,7 @@ int ZufallszahlGenerieren(int iVon, int iBis){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: PositionSetzen()                                                *
  * Parameter: int iPositionY, int iPositionX                                 *
- * Rückgabewert: none                                                        *
+ * RÃ¼ckgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
  void PositionSetzen(int *iPositionY, int *iPositionX){
         *iPositionY = (*iPositionY + (*iPositionX-(*iPositionX)%9)/9)%9;
@@ -164,10 +181,10 @@ int ZufallszahlGenerieren(int iVon, int iBis){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: LoesungGenerieren()                                             *
  * Parameter: int iPositionY, int iPositionX                                 *
- * Rückgabewert: none                                                        *
+ * RÃ¼ckgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void LoesungGenerieren(int iPositionY, int iPositionX){
-    int i, j, iZahl=ZufallszahlGenerieren(1,9);
+    int i, iZahl=ZufallszahlGenerieren(1,9);
 
     PositionSetzen(&iPositionY, &iPositionX);
 
@@ -192,7 +209,7 @@ void LoesungGenerieren(int iPositionY, int iPositionX){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: AnfangsfelderGenerieren()                                       *
  * Parameter: none                                                           *
- * Rückgabewert: none                                                        *
+ * RÃ¼ckgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void AnfangsfelderGenerieren(){
     int iPositionY = ZufallszahlGenerieren(0,8),
@@ -208,7 +225,7 @@ void AnfangsfelderGenerieren(){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: LoesungFinden()                                                 *
  * Parameter: int iPositionY, int iPositionX                                 *
- * Rückgabewert: none                                                        *
+ * RÃ¼ckgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void LoesungFinden(int iPositionY, int iPositionX){
     int i, j;
@@ -242,7 +259,7 @@ void LoesungFinden(int iPositionY, int iPositionX){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: ZahlAnPositionPruefen()                                         *
  * Parameter: int *iSudoku, int iPositionY, int iPositionX, int iZahl        *
- * Rückgabewert: int iPruef                                                  *
+ * RÃ¼ckgabewert: int iPruef                                                  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int ZahlAnPositionPruefen(int *iSudoku, int iPositionY, int iPositionX, int iZahl){
     int i, j, iBlockY, iBlockX, iPruef;
@@ -286,7 +303,7 @@ int ZahlAnPositionPruefen(int *iSudoku, int iPositionY, int iPositionX, int iZah
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: KomplettPruefen()                                               *
  * Parameter: int *iPointer                                                  *
- * Rückgabewert: int iPruef                                                  *
+ * RÃ¼ckgabewert: int iPruef                                                  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int KomplettPruefen(int *iPointer){
     int i, j, iPruef=0;
@@ -309,7 +326,7 @@ int KomplettPruefen(int *iPointer){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: KomplettRichtigPruefen()                                        *
  * Parameter: none                                                           *
- * Rückgabewert: int iPruef                                                  *
+ * RÃ¼ckgabewert: int iPruef                                                  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int KomplettRichtigPruefen(){
     int i, j, iPruef=0;
@@ -332,15 +349,24 @@ int KomplettRichtigPruefen(){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: SudokuAusgaben()                                                *
  * Parameter: none                                                           *
- * Rückgabewert: none                                                        *
+ * RÃ¼ckgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void SudokuAusgeben(){
     int i, j, k, l, m, n, o;
+    int iZeit;
+    int iMinuten;
+    int iSekunden;
     char cTopline[79];
     char cBottomline[79];
     char cStrongline[79];
     char cWeakline[79];
     char cEmptyline[79];
+
+    iZeit = iZeitBerechnen();
+    iMinuten = iZeit/60;
+    iSekunden = iZeit%60;
+
+    gesamtPunkteBerechnen();
 
     for(i=0; i<79; i++){
         if(i==0){
@@ -401,7 +427,6 @@ void SudokuAusgeben(){
         if(i==2 || i==5){
             printf("\n----------+-----------+---------- ");
         }
-
         printf("\n");
     }
     //*/
@@ -411,7 +436,7 @@ void SudokuAusgeben(){
             "\n" \
             " SudoCu Version 4.4Alpha          " \
             "%.79s     " \
-            "Zeile 2 rechts\n", cTopline, cEmptyline);
+            "Steuerung:\n", cTopline, cEmptyline);
     for(i=0; i<9; i++){
         for(l=0; l<3; l++){
             switch(i){
@@ -537,114 +562,121 @@ void SudokuAusgeben(){
             }
             switch(i){
                 case 0: switch(l){
-                    case 0: printf("   Zeile 3 rechts"); break;
-                    case 1: printf("   Zeile 4 rechts"); break;
-                    case 2: printf("   Zeile 5 rechts"); break;
+                    case 0: printf("                 "); break;
+                    case 1: printf("      0 = Kugelschreiber"); break;
+                    case 2: printf("      1 = Bleistift"); break;
                 } break;
                 case 1: switch(l){
-                    case 0: printf("   Zeile 7 rechts"); break;
-                    case 1: printf("   Zeile 8 rechts"); break;
-                    case 2: printf("   Zeile 9 rechts"); break;
+                    case 0: printf("      3 = Kanidaten anzeigen"); break;
+                    case 1: printf("                         "); break;
+                    case 2: printf("      B = Bestenliste"); break;
                 } break;
                 case 2: switch(l){
-                    case 0: printf("   Zeile 11 rechts"); break;
-                    case 1: printf("   Zeile 12 rechts"); break;
-                    case 2: printf("   Zeile 13 rechts"); break;
+                    //11 Rechts
+                    case 0: printf("      Q = Schliessen"); break;
+                    case 1: printf("                    "); break;
+                    case 2: printf("                    "); break;
                 } break;
                 case 3: switch(l){
-                    case 0: printf("   Zeile 17 rechts"); break;
-                    case 1: printf("   Zeile 18 rechts"); break;
-                    case 2: printf("   Zeile 19 rechts"); break;
+                    //17 Rechts
+                    case 0: printf("      %i:%02i", iMinuten, iSekunden); break;
+                    case 1: printf("                    "); break;
+                    case 2: printf("                    "); break;
                 } break;
                 case 4: switch(l){
-                    case 0: printf("   Zeile 21 rechts"); break;
-                    case 1: printf("   Zeile 22 rechts"); break;
-                    case 2: printf("   Zeile 23 rechts"); break;
+                    //21 Rechts
+                    case 0: printf("                    "); break;
+                    case 1: printf("                    "); break;
+                    case 2: printf("                    "); break;
                 } break;
                 case 5: switch(l){
-                    case 0: printf("   Zeile 25 rechts"); break;
-                    case 1: printf("   Zeile 26 rechts"); break;
-                    case 2: printf("   Zeile 27 rechts"); break;
+                    //25 Rechts
+                    case 0: printf("                    "); break;
+                    case 1: printf("                    "); break;
+                    case 2: printf("                    "); break;
                 } break;
                 case 6: switch(l){
-                    case 0: printf("   Zeile 31 rechts"); break;
-                    case 1: printf("   Zeile 32 rechts"); break;
-                    case 2: printf("   Zeile 33 rechts"); break;
+                    //31 Rechts
+                    case 0: printf("                    "); break;
+                    case 1: printf("                    "); break;
+                    case 2: printf("                    "); break;
                 } break;
                 case 7: switch(l){
-                    case 0: printf("   Zeile 35 rechts"); break;
-                    case 1: printf("   Zeile 36 rechts"); break;
-                    case 2: printf("   Zeile 37 rechts"); break;
+                    //35 Rechts
+                    case 0: printf("                    "); break;
+                    case 1: printf("                    "); break;
+                    case 2: printf("                    "); break;
                 } break;
                 case 8: switch(l){
-                    case 0: printf("   Zeile 39 rechts"); break;
-                    case 1: printf("   Zeile 40 rechts"); break;
-                    case 2: printf("   Zeile 41 rechts"); break;
+                    //39 Rechts
+                    case 0: printf("                    "); break;
+                    case 1: printf("                    "); break;
+                    case 2: printf("                    "); break;
                 } break;
             }
             if(l==2 && i==0){
                 printf( "\n                                  " \
                         "%.79s     " \
-                        "Zeile 6 rechts", cWeakline);
+                        "   2 = Loesung Position", cWeakline);
             }else if(l==2 && i==1){
                 printf( "\n auszufuellen.                    " \
                         "%.79s     " \
-                        "Zeile 10 rechts", cWeakline);
+                        "   X = Zurueck/Spiel abbrechen", cWeakline);
             }else if(l==2 &&i==2){
                 printf( "\n  Zahl nur einmal vor             " \
                         "%.79s     " \
-                        "Zeile 14 rechts\n" \
+                        "\n" \
                         "                                  " \
                         "%.79s     " \
-                        "Zeile 15 rechts\n" \
+                        "\n" \
                         "                                  " \
                         "%.79s     " \
-                        "Zeile 16 rechts", cEmptyline, cStrongline, cEmptyline);
+                        "", cEmptyline, cStrongline, cEmptyline);
             }else if(l==2 && i==3){
                 printf( "\n                                  " \
                         "%.79s     " \
-                        "Zeile 20 rechts", cWeakline);
+                        "", cWeakline);
             }else if(l==2 && i==4){
                 // 24 links
                 printf( "\n                                  " \
                         "%.79s     " \
-                        "Zeile 24 rechts", cWeakline);
+                        "", cWeakline);
             }else if(l==2 && i==5){
                 // 28 links
                 printf( "\n                                  " \
                         "%.79s     " \
-                        "Zeile 28 rechts\n" \
+                        "\n" \
                         // 29 links
                         "                                  " \
                         "%.79s     " \
-                        "Zeile 29 rechts\n" \
+                        "\n" \
                         // 30 links
                         "                                  " \
                         "%.79s     " \
-                        "Zeile 30 rechts", cEmptyline, cStrongline, cEmptyline);
+                        "", cEmptyline, cStrongline, cEmptyline);
             }else if(l==2 && i==6){
                 // 34 links
                 printf( "\n                                  " \
                         "%.79s     " \
-                        "Zeile 34 rechts", cWeakline);
+                        "", cWeakline);
             }else if(l==2 && i==7){
                 // 38 links
                 printf( "\n                                  " \
                         "%.79s     " \
-                        "Zeile 38 rechts", cWeakline);
+                        "", cWeakline);
             }else if(l==2 && i==8){
                 // 42 links
                 printf( "\n                                  " \
                         "%.79s     " \
-                        "Zeile 42 rechts\n" \
+                        "\n" \
                         // 43 links
                         "                                  " \
                         "%.79s     " \
-                        "Zeile 43 rechts\n" \
+                        "\n" \
                         "                                  " \
                         "     1       2       3    " \
                         "     4       5       6    " \
-                        "     7       8       9    X\n", cEmptyline, cBottomline);
+                        "     7       8       9    X", cEmptyline, cBottomline);
             }
             printf("\n");
         }
@@ -655,7 +687,7 @@ void SudokuAusgeben(){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: KandidatenGenerieren()                                          *
  * Parameter: none                                                           *
- * Rückgabewert: none                                                        *
+ * RÃ¼ckgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void KandidatenGenerieren(){
     int i, j, k;
@@ -665,6 +697,7 @@ void KandidatenGenerieren(){
             for(k=0; k<9; k++){
                 if(ZahlAnPositionPruefen(&spiel.iSpiel, i, j, k+1)){
                     spiel.iHilfsfelder[i][j][k] = k+1;
+                    iZeitStartWert = iZeitStartWert -5;
                 }else{
                     spiel.iHilfsfelder[i][j][k] = 0;
                 }
@@ -677,7 +710,7 @@ void KandidatenGenerieren(){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: ZahlEintragen()                                                 *
  * Parameter: int iPositionY, int iPositionX, int iZahl                      *
- * Rückgabewert: int (0, 1 oder 2)                                           *
+ * RÃ¼ckgabewert: int (0, 1 oder 2)                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int ZahlEintragen(int iPositionY, int iPositionX, int iZahl){
     int i, j, iBlockY, iBlockX;
@@ -721,10 +754,60 @@ int ZahlEintragen(int iPositionY, int iPositionX, int iZahl){
         }
 
         if(spiel.iLoesung[iPositionY-1][iPositionX-1]== iZahl){
-            return 1;
+            punkteBerechnen(1);
         }else{
-            return 2;
+            punkteBerechnen(2);
         }
+
+    }
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Funktion: LoesungEintragen()                                              *
+ * Parameter: int iPositionY, int iPositionX                                 *
+ * RÃ¼ckgabewert: int (0, 1)                                                  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+int LoesungEintragen(int iPositionY, int iPositionX){
+    int i, j, iBlockY, iBlockX;
+
+    if((double)(iPositionY)/3<=1){
+        iBlockY = 0;
+    }else if((double)(iPositionY)/3<=2){
+        iBlockY = 1;
+    }else if((double)(iPositionY)/3<=3){
+        iBlockY = 2;
+    }
+    if((double)(iPositionX)/3<=1){
+        iBlockX = 0;
+    }else if((double)(iPositionX)/3<=2){
+        iBlockX = 1;
+    }else if((double)(iPositionX)/3<=3){
+        iBlockX = 2;
+    }
+
+    if(spiel.iAnfangsfelder[iPositionY-1][iPositionX-1]==0){
+        spiel.iSpiel[iPositionY-1][iPositionX-1] = spiel.iLoesung[iPositionY-1][iPositionX-1];
+
+        for(i=0; i<9; i++){
+            spiel.iHilfsfelder[iPositionY-1][iPositionX-1][i] = 0;
+        }
+
+        for(i=0; i<9; i++){
+            if(spiel.iHilfsfelder[i][iPositionX-1][spiel.iLoesung[iPositionY-1][iPositionX-1]-1]==spiel.iLoesung[iPositionY-1][iPositionX-1]){
+                spiel.iHilfsfelder[i][iPositionX-1][spiel.iLoesung[iPositionY-1][iPositionX-1]-1] = 0;
+            }
+            if(spiel.iHilfsfelder[iPositionY-1][i][spiel.iLoesung[iPositionY-1][iPositionX-1]-1]==spiel.iLoesung[iPositionY-1][iPositionX-1]){
+                spiel.iHilfsfelder[iPositionY-1][i][spiel.iLoesung[iPositionY-1][iPositionX-1]-1] = 0;
+            }
+        }
+        for(i=0; i<3; i++){
+            for(j=0; j<3; j++){
+                if(spiel.iHilfsfelder[i+(3*iBlockY)][j+(3*iBlockX)][spiel.iLoesung[iPositionY-1][iPositionX-1]-1]==spiel.iLoesung[iPositionY-1][iPositionX-1]){
+                    spiel.iHilfsfelder[i+(3*iBlockY)][j+(3*iBlockX)][spiel.iLoesung[iPositionY-1][iPositionX-1]-1] = 0;
+                }
+            }
+        }
+        return 1;
     }else{
         return 0;
     }
@@ -733,7 +816,7 @@ int ZahlEintragen(int iPositionY, int iPositionX, int iZahl){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: KandidatEintragenEntfernen()                                    *
  * Parameter: int iPositionY, int iPositionX, int iZahl                      *
- * Rückgabewert: int (0 oder 1)                                              *
+ * RÃ¼ckgabewert: int (0 oder 1)                                              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int KandidatEintragenEntfernen(int iPositionY, int iPositionX, int iZahl){
     if(spiel.iSpiel[iPositionY-1][iPositionX-1]==0){

@@ -166,7 +166,7 @@
 	<string.h>
 	"sqlite3.h"
 
-1497964672 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sdc\punkte.c
+1498138080 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sdc\punkte.c
 	"Punkte.h"
 
 1497964672 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sdc\punkte.h
@@ -235,15 +235,17 @@
 	<string.h>
 	"sqlite3.h"
 
-1497964673 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sdc\zeit.c
+1498127503 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sdc\zeit.c
 	"Zeit.h"
 
 1497964673 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sdc\zeit.h
 	<stdio.h>
 	<time.h>
 
-1498123264 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sdc\main.c
+1498139627 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sdc\main.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
+	"Zeit.h"
+	"Punkte.h"
 

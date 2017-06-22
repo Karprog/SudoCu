@@ -2,6 +2,6 @@
 #include <stdlib.h>
 
 int main(){
-    Logik(3);
+    Logik(1);
     return 0;
 }
