@@ -11,10 +11,10 @@ void LoesungFinden(int iPositionY, int iPositionX);                             
 void LoesungGenerieren(int iPositionY, int iPositionX);                                 //Generierung
 int Logik(int iSchwierigkeitsgrad);                                                     //Spielfunktion
 void PositionSetzen(int *iPositionY, int *iPositionX);                                  //Hilfsfunktion
-void SudokuAusgeben();                                                                  //Ausgabe
+void SudokuAusgeben();                                                                  //Ein-/Ausgabe
 void SudokuErstellen(int iSchwierigkeitsgrad);                                          //Generierung
 void SudokuInitialisieren();                                                            //Generierung
-void SudokuSpielen();                                                                   //Spielfunktion
+void SudokuSpielen();                                                                   //Ein-/Ausgabe
 int ZahlAnPositionPruefen(int *iSudoku, int iPositionY, int iPositionX, int iZahl);     //Hilfsfunktion
 int ZahlEintragen();                                                                    //Spielfunktion
 int ZufallszahlGenerieren(int iVon, int iBis);                                          //Generierung
@@ -85,29 +85,32 @@ void SudokuErstellen(int iSchwierigkeitsgrad){
  * Rückgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void SudokuSpielen(){
-    int posx, posy, zahl, mode;
+    int iPositionX, iPositionY, iZahl, iModus;
 
     SudokuAusgeben();
 
     do{
-        printf("Kugelschreiber(0) oder Bleistift(1) oder Hilfe(2):");
-        scanf("%i", &mode);
+        printf("Kugelschreiber(0) oder Bleistift(1) oder Lösung an Position(2) oder Kandidaten(3):");
+        scanf("%i", &iModus);
 
-        if(mode==0 || mode==1){
+        if(iModus==0 || iModus==1 || iModus==2){
             printf("Bitte geben Sie PositionX ein:");
-            scanf("%i", &posx);
+            scanf("%i", &iPositionX);
 
             printf("Bitte geben Sie PositionY ein:");
-            scanf("%i", &posy);
-
-            printf("Bitte geben Sie die Zahl ein:");
-            scanf("%i", &zahl);
-            if(mode==0){
-                ZahlEintragen(posy, posx, zahl);
-            }else if(mode==1){
-                KandidatEintragenEntfernen(posy, posx, zahl);
+            scanf("%i", &iPositionY);
+            if(iModus==0 || iModus==1){
+                printf("Bitte geben Sie die Zahl ein:");
+                scanf("%i", &iZahl);
+                if(iModus==0){
+                    ZahlEintragen(iPositionY, iPositionX, iZahl);
+                }else if(iModus==1){
+                    KandidatEintragenEntfernen(iPositionY, iPositionX, iZahl);
+                }
+            }else{
+                LoesungEintragen(iPositionY, iPositionX);
             }
-        }else if(mode==2){
+        }else if(iModus==3){
             KandidatenGenerieren();
         }
 
@@ -403,7 +406,7 @@ void SudokuAusgeben(){
     }
     //*/
     //*
-   printf( "                                  " \
+   printf( "                                Y " \
             "%.79s     " \
             "\n" \
             " SudoCu Version 4.4Alpha          " \
@@ -641,7 +644,7 @@ void SudokuAusgeben(){
                         "                                  " \
                         "     1       2       3    " \
                         "     4       5       6    " \
-                        "     7       8       9\n", cEmptyline, cBottomline);
+                        "     7       8       9    X\n", cEmptyline, cBottomline);
             }
             printf("\n");
         }
