@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+int Logik();
 void test();
 void SudokuInitialisieren();
 int ZufallszahlGenerieren();
@@ -23,43 +24,17 @@ typedef struct{
 } SUDOKU;
 SUDOKU spiel;
 
-int mainLogik(){
-    int k;
+int Logik(){
+    int i, j, k;
+    int posx, posy, zahl;
     srand(time(NULL));
+
+    SudokuInitialisieren();
+    LoesungErstellen(0, 0);
 
     while(spiel.iAnz!=1){
         test();
     }
-
-    system("pause");
-
-    return k;
-}
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Funktion: test()                                                          *
- * Parameter: none                                                           *
- * Rückgabewert: none                                                        *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-void test(){
-    int i, j;
-    int posx, posy, zahl;
-
-    SudokuInitialisieren();
-
-    LoesungErstellen(0, 0);
-
-    for(i=0; i<9; i++){
-        for(j=0; j<9; j++){
-            spiel.iAnfangsfelder[i][j] = spiel.iLoesung[i][j];
-        }
-    }
-
-    for(i=0; i<30; i++){
-        SudokuErstellen();
-    }
-
-    LoesungFinden(0, 0);
 
     for(i=0; i<9; i++){
         for(j=0; j<9; j++){
@@ -88,8 +63,30 @@ void test(){
         SudokuAusgeben();
     }while(zahl<10);
 
+    system("pause");
 
+    return k;
+}
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Funktion: test()                                                          *
+ * Parameter: none                                                           *
+ * Rückgabewert: none                                                        *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+void test(){
+    int i, j;
+
+    for(i=0; i<9; i++){
+        for(j=0; j<9; j++){
+            spiel.iAnfangsfelder[i][j] = spiel.iLoesung[i][j];
+        }
+    }
+
+    for(i=0; i<40; i++){
+        SudokuErstellen();
+    }
+
+    LoesungFinden(0, 0);
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -337,7 +334,7 @@ void SudokuAusgeben(){
 
     system("cls");
 
-    /*
+    //*
     for(i=0; i<9; i++){
         for(j=0; j<9; j++){
             if(spiel.iSpiel[i][j]==0){
@@ -379,8 +376,8 @@ void SudokuAusgeben(){
 
         printf("\n");
     }
-    */
-
+    //*/
+    /*
     printf( "Zeile 1 links      " \
             "%.79s     " \
             "Zeile 1 rechts\n" \
@@ -608,7 +605,7 @@ void SudokuAusgeben(){
             printf("\n");
         }
     }
-    /*
+
     printf("\nB1 = %c", '\xB1');
     printf("\nB2 = %c", '\xB2');
     printf("\nB3 = %c", '\xB3');
@@ -622,7 +619,7 @@ void SudokuAusgeben(){
     printf("\nC5 = %c", '\xC5');
     printf("\nD9 = %c", '\xD9');
     printf("\nDA = %c", '\xDA');
-    */
+    //*/
 }
 
 void HilfsfelderSetzen(){
