@@ -25,7 +25,7 @@ int main(void)
 /*Schreibt die Nutzerdaten in die Datenbank. Wenn dies
 gelingt, wird dem User angegeben, dass der Registrierungsvorgang
 erfolgreich war. Wenn nicht, wird eine Fehlermeldung ausgegeben.*/
-int leseNutzerdatenVonDb()
+int leseNutzerdatenVonDb(void)
 {
     /*Variablendeklaration*/
     sqlite3 *db_handle;
@@ -33,11 +33,6 @@ int leseNutzerdatenVonDb()
     int control;
     char* sql;
     char* errormsg;
-    char nutzername[30] = "testnutzer";
-    char passwort[20] = "testpasswort";
-
-    /*char nutzername[30] = "michGibtEsNicht";
-    char passwort[20] = "gibtEsNicht";*/
 
     /*Öffnen der Datenbankverbindung*/
     rc = sqlite3_open(DATABASE_FILE, &db_handle);
