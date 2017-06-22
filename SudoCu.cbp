@@ -31,9 +31,54 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="BenutzerVonStdin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="BestenlisteLesenUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="BestenlisteSchreibenUnit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="NutzerInDb.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="NutzerLesenVonDb.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Punkte.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Punkte.h" />
+		<Unit filename="SuDoCu.depend" />
+		<Unit filename="SuDoCu.layout" />
+		<Unit filename="SudoCu.cbp" />
+		<Unit filename="Testmain.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Zeit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Zeit.h" />
+		<Unit filename="begrusungsbildschirm.h" />
+		<Unit filename="begrusungsbirldschirm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="benutzerverwaltung.sqlite3" />
+		<Unit filename="frontend.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="mainFile.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sqlite3.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="sqlite3.h" />
+		<Unit filename="sqlite3ext.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
