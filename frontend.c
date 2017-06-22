@@ -1,7 +1,17 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Autoren: Stefanie Pfleiderer, Robin Kitzelmann, Burhan Karaca, Pascal     *
+ *          Scheufens, Janik Busch                                           *
+ * Datum:   23.06.2017                                                       *
+ * Name:    SudoCu                                                           *
+ * Version: 1.4                                                              *
+ * Compiler:GNU                                                              *
+ * Beschreibung:                                                              *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+//Funktions-Prototypen
 char Login();
 char Hauptmenue();
 char Bestenliste();
@@ -12,21 +22,39 @@ char Schwierigkeit();
 int Anmelden();
 int Registrieren();
 
+//Globalevariable für den Nutzernnamen, welcher überall angezeigt wird.
 char NUTZERNAME[40];
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Funktion: mainFrontend()                                                  *
+ * Parameter: none                                                           *
+ * Rückgabewert: none                                                        *
+ * Beschreibung: Startpunkt des Frontends, von hier aus wird das Hauptmenue  *
+ *               gestartet.                                                  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int mainFrontend()
 {
-
+    //Aufruf des Hauptmenues
     Hauptmenue();
     return 0;
 }
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Funktion: Hauptmenue()                                                    *
+ * Parameter: none                                                           *
+ * Rückgabewert: char auswahl                                                *
+ * Beschreibung: Diese Funktion stellt das Grafische Hauptmenue dar und fängt*
+ *               nutzereigaben ab, um sich in der Menue Struktur zu bewegen  *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 char Hauptmenue()
 {
+        //Variablen Deklaration
         char auswahl;
 
         do
         {
+            //Ausgabe des Menues
             system("cls");
             printf("\n");
             printf(" SudoCu Version 4.4Alpha\n\n\n");
@@ -48,24 +76,31 @@ char Hauptmenue()
             printf("  vor.");
             printf(" \n\n\n");
 
+            //Bentzer eingabe für weitere Menues
             scanf("%c", &auswahl);
-
+        //Die While Schleife lässt den nutzer solange eingaben machen bis ein
+        //gültiger Wert eingegeben wurde.
         }while (auswahl != 'a' && auswahl != 'b' && auswahl != 'c' && auswahl != 'x');
 
-
+        //Hier wird entschieden welche Aktion der User ausführen möchte.
         switch(auswahl)
         {
+            //Ruft das Menue für Anmeldung und Registrierung auf
             case 'a':
                 Login();
                 break;
             case 'b':
-               strcpy(NUTZERNAME,"Gast");
-               Schwierigkeit();
+                //Setzt den Nutzernamen für Gastspieler ohne Anmeldung
+                strcpy(NUTZERNAME,"Gast");
+                //öffnet das Schwierigkeitenmenue
+                Schwierigkeit();
                 break;
             case 'c':
+                //zeigt die Bestenlistean
                 Bestenliste();
                 break;
             case 'x':
+                //beendet das Programm
                 exit(0);
                 break;
             default:
@@ -74,6 +109,8 @@ char Hauptmenue()
 
         return auswahl;
 }
+
+
 
 char Login()
 {
