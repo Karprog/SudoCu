@@ -3,7 +3,7 @@
 #include "Zeit.h"
 
 int main(){
-
+    system("mode 600");
     begrusung();
 
     while(iZeitBerechnen() < 3);
