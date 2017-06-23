@@ -1,7 +1,7 @@
 #include "Zeit.h"
 
 long int iZeitStartWert = -1;
-int iLetzteZeit = 0;
+long int iLetzteZeit = 0;
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -9,7 +9,7 @@ int iLetzteZeit = 0;
  * Parameter: none                                                           *
  * Rückgabewert: int (Anzahl der Sekunden oder -1)                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-int iZeitBerechnen(void){
+int zeitBerechnen(void){
     // Holt die jetzige Zeit
     int iZeitJetzt = time(0);
     int iSekunden = 0;
@@ -24,9 +24,7 @@ int iZeitBerechnen(void){
 
     if((iLetzteZeit - iZeitJetzt) <= -1){
         iLetzteZeit = iZeitJetzt;
-
-        return iSekunden;
     }
 
-    return -1;
+    return iSekunden;
 }

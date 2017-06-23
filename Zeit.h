@@ -5,8 +5,8 @@
 #include <time.h>
 
 long int iZeitStartWert;
-int iLetzteZeit;
+long int iLetzteZeit;
 
-int iZeitBerechnen();
+int zeitBerechnen();
 
 #endif /* ZEIT_H_ */
