@@ -1,0 +1,7 @@
+#ifndef BEGRUESSUNGSBILDSCHIRM_H_INCLUDED
+#define BEGRUSUESNGSBILDSCHIRM_H_INCLUDED
+#include <stdio.h>
+
+void begruessung();
+
+#endif // BEGRUSUNGSBILDSCHIRM_H_INCLUDED
