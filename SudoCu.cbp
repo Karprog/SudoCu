@@ -31,7 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Zeit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Zeit.h" />
+		<Unit filename="begruessungsbildschirm.h" />
+		<Unit filename="begrusungsbirldschirm.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mainFile.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
