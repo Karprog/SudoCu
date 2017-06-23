@@ -6,66 +6,51 @@
 #define _CRT_SECURE_NO_DEPRECATE 1
 #define DATABASE_FILE "benutzerverwaltung.sqlite3"
 
-int leseNutzerdaten(void);
-int schreibeNutzerdatenInDb(char *nutzername, char *passwort);
+/***************************************************************
+int schreibeNutzerdatenInDb(char *cNutzerdaten, char *cPasswort)
+Übergabeparameter: char *cNutzerdaten, char *cPasswort
+Rückgabeparameter: 0 oder -1 (-1 wenn ein SQL-Fehler auf-
+                    getreten ist)
+Schreibt den Nutzernamen und das Passwort, die der Nutzer über
+die Kommandozeile einliest, in die Datenbank. Im Erfolgsfall
+bekommt der Nutzer eine Nachricht, dass er erfolgreich in das
+System aufgenommen wurde, sonst eine Fehlermeldung.
+***************************************************************/
 
-
-int main()
-{
-
-    leseNutzerdaten();
-    system("pause");
-    return 0;
-}
-
-int leseNutzerdaten(void)
-{
-    char benutzername[128];
-    char passwort[128];
-
-    printf("Bitte Benutzernamen eingeben: ");
-    fflush(stdin);
-    scanf("%s", benutzername);
-
-    printf("\nBitte Passwort eingeben: ");
-    fflush(stdin);
-    scanf("%s", passwort);
-
-    schreibeNutzerdatenInDb(benutzername, passwort);
-    return 0;
-}
-
-int schreibeNutzerdatenInDb(char *nutzername, char *passwort)
+int schreibeNutzerdatenInDb(char *cNutzername, char *cPasswort)
 {
      /*Variablendeklaration*/
     sqlite3 *db_handle;
-    int rc;
-    int control;
-    char* sql;
-    char* errormsg;
+    int iRc;
+    int iControl;
+    char* cSql;
+    char* cErrormsg;
 
     /*Öffnen der Datenbankverbindung*/
-    rc = sqlite3_open(DATABASE_FILE, &db_handle);
+    iRc = sqlite3_open(DATABASE_FILE, &db_handle);
 
-    if (rc == 0) {
+    if (iRc == 0) {
         /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
-        sql = sqlite3_mprintf("INSERT INTO nutzerdaten (nutzername, passwort) VALUES ('%s', '%s')",
-                            nutzername, passwort);
+        cSql = sqlite3_mprintf("INSERT INTO nutzerdaten (benutzername, " \
+                              "passwort) VALUES ('%s', '%s')",
+                            cNutzername, cPasswort);
     }
+    /*Ausgabe zu Problemen beim Verbindungsaufbau zur Datenbank*/
     else {
         printf("Es konnte keine Verbindung zur Datenbank aufgebaut werden.");
     }
 
     /*Ausführen der Query auf der Datenbank*/
-    control = sqlite3_exec(db_handle, sql, NULL, NULL, &errormsg);
+    iControl = sqlite3_exec(db_handle, cSql, NULL, NULL, &cErrormsg);
 
     /*Fehlermeldung bei fehlgeschlagener Ausführung,
     Freigabe der Verbindungsressourcen*/
-    if (rc != SQLITE_OK || control != 0) {
-        printf("SQL-Fehler: %s\n", errormsg);
-		sqlite3_free(errormsg);
+    if (iRc != SQLITE_OK || iControl != 0) {
+        printf("SQL-Fehler: %s\n", cErrormsg);
+		sqlite3_free(cErrormsg);
 		return -1;
     }
+    /*Ausgabe der erfolgreichen Aufnahme in das System*/
     else {
         printf(
                "\nSie wurden in das System aufgenommen und koennen "
@@ -74,7 +59,7 @@ int schreibeNutzerdatenInDb(char *nutzername, char *passwort)
                "sich nun mit Ihren Zugangsdaten anmelden\n"
                );
     }
-
+    /*Schließen der Datenbankverbindung*/
     sqlite3_close(db_handle);
     return 0;
 }
