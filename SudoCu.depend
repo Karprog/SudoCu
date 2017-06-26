@@ -1,0 +1,326 @@
+# depslib dependency file v1.0
+1498203224 source:c:\vs\ansic\sudocu\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Zeit.h"
+	"Punkte.h"
+
+1497965679 source:c:\vs\ansic\sudocu\begrusungsbirldschirm.c
+	"begrusungsbildschirm.h"
+
+1497965679 c:\vs\ansic\sudocu\begrusungsbildschirm.h
+	<stdio.h>
+
+1497965679 source:c:\vs\ansic\sudocu\benutzervonstdin.c
+	<stdio.h>
+	<stdlib.h>
+
+1497965679 source:c:\vs\ansic\sudocu\bestenlistelesenunit.c
+	<stdio.h>
+	<stdlib.h>
+
+1497965779 source:c:\vs\ansic\sudocu\bestenlisteschreibenunit.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1497965679 c:\vs\ansic\sudocu\sqlite3.h
+	<stdarg.h>
+
+1498204622 source:c:\vs\ansic\sudocu\frontend.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"BestenlisteLesen.h"
+	"BestenlisteSchreiben.h"
+	"LeseNutzer.h"
+
+1498129975 source:c:\vs\ansic\sudocu\mainfile.c
+	<stdio.h>
+	<stdlib.h>
+	"Zeit.h"
+
+1498033262 source:c:\vs\ansic\sudocu\nutzerindb.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498030265 source:c:\vs\ansic\sudocu\nutzerlesenvondb.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498140025 source:c:\vs\ansic\sudocu\punkte.c
+	"Punkte.h"
+
+1497965679 c:\vs\ansic\sudocu\punkte.h
+	<stdio.h>
+
+1497965679 source:c:\vs\ansic\sudocu\sqlite3.c
+	<vxWorks.h>
+	<pthread.h>
+	"mingw.h"
+	"_mingw.h"
+	<stdarg.h>
+	"config.h"
+	<stdint.h>
+	<inttypes.h>
+	<intrin.h>
+	<cmnintrin.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	"windows.h"
+	<sys/cygwin.h>
+	<errno.h>
+	<process.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/ioctl.h>
+	<sys/file.h>
+	<sys/param.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	<tcl.h>
+	"sqlite3rtree.h"
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+	<ctype.h>
+	<math.h>
+
+1497965679 source:c:\vs\ansic\sudocu\testmain.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498140041 source:c:\vs\ansic\sudocu\zeit.c
+	"Zeit.h"
+
+1497965679 c:\vs\ansic\sudocu\zeit.h
+	<stdio.h>
+	<time.h>
+
+1498202637 source:c:\vs\ansic\sudocu\benutzerverwaltung.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498203369 source:c:\vs\ansic\sudocu\bestenlistelesen.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+	"BestenlisteLesen.h"
+
+1498202068 source:c:\vs\ansic\sudocu\bestenlisteschreiben.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"BestenlisteSchreiben.h"
+	"sqlite3.h"
+
+1498203736 source:c:\vs\ansic\sudocu\lesenutzer.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+	"LeseNutzer.h"
+
+1498143196 c:\vs\ansic\sudocu\bestenlisteschreiben.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498203369 c:\vs\ansic\sudocu\bestenlistelesen.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498203683 c:\vs\ansic\sudocu\lesenutzer.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498205361 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\begrusungsbirldschirm.c
+	"begrusungsbildschirm.h"
+
+1498205361 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\begrusungsbildschirm.h
+	<stdio.h>
+
+1498205384 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\benutzerverwaltung.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498205361 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\sqlite3.h
+	<stdarg.h>
+
+1498462288 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlisteschreiben.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"BestenlisteSchreiben.h"
+	"LeseNutzer.h"
+	"Punkte.h"
+	"sqlite3.h"
+
+1498224462 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlisteschreiben.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"BestenlisteSchreiben.h"
+	"LeseNutzer.h"
+	"sqlite3.h"
+
+1498462288 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\frontend.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"BestenlisteLesen.h"
+	"BestenlisteSchreiben.h"
+	"LeseNutzer.h"
+
+1498223149 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlistelesen.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498220532 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\lesenutzer.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498221409 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\lesenutzer.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+	"LeseNutzer.h"
+
+1498461548 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Zeit.h"
+	"Punkte.h"
+	"LeseNutzer.h"
+
+1498205361 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\zeit.h
+	<stdio.h>
+	<time.h>
+
+1498205361 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\punkte.h
+	<stdio.h>
+
+1498205384 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\mainfile.c
+	<stdio.h>
+	<stdlib.h>
+	"Zeit.h"
+
+1498205384 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\punkte.c
+	"Punkte.h"
+
+1498205361 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\sqlite3.c
+	<vxWorks.h>
+	<pthread.h>
+	"mingw.h"
+	"_mingw.h"
+	<stdarg.h>
+	"config.h"
+	<stdint.h>
+	<inttypes.h>
+	<intrin.h>
+	<cmnintrin.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	"windows.h"
+	<sys/cygwin.h>
+	<errno.h>
+	<process.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/ioctl.h>
+	<sys/file.h>
+	<sys/param.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	<tcl.h>
+	"sqlite3rtree.h"
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+	<ctype.h>
+	<math.h>
+
+1498205384 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\zeit.c
+	"Zeit.h"
+
+1498223139 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlistelesen.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+	"BestenlisteLesen.h"
+

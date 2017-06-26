@@ -1,8 +1,18 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Autoren: Stefanie Pfleiderer, Robin Kitzelmann, Burhan Karaca, Pascal     *
+ *          Scheufens, Janik Busch                                           *
+ * Datum:   23.06.2017                                                       *
+ * Name:    SudoCu                                                           *
+ * Version: 1.4                                                              *
+ * Compiler:GNU                                                              *
+ * Beschreibung:                                                             *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "Zeit.h"
 #include "Punkte.h"
+#include "LeseNutzer.h"
 
 void AnfangsfelderGenerieren();                                                         //Generierung
 void KandidatenGenerieren();                                                            //Spielfunktion
@@ -17,9 +27,9 @@ void PositionSetzen(int *iPositionY, int *iPositionX);                          
 void SudokuAusgeben();                                                                  //Ein-/Ausgabe
 void SudokuErstellen(int iSchwierigkeitsgrad);                                          //Generierung
 void SudokuInitialisieren();                                                            //Generierung
-void SudokuSpielen();                                                                   //Ein-/Ausgabe
+int SudokuSpielen();                                                                   //Ein-/Ausgabe
 int ZahlAnPositionPruefen(int *iSudoku, int iPositionY, int iPositionX, int iZahl);     //Hilfsfunktion
-int ZahlEintragen();                                                                    //Spielfunktion
+void ZahlEintragen();                                                                    //Spielfunktion
 int ZufallszahlGenerieren(int iVon, int iBis);                                          //Generierung
 
 typedef struct{
@@ -31,12 +41,19 @@ typedef struct{
 } SUDOKU;
 SUDOKU spiel;
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Funktion: Logik()                                                         *
+ * Parameter: none                                                           *
+ * Rückgabewert: none                                                        *
+ * Beschreibung: Aufruf der verschiedenen Funktionen, um das Sudoku spielen  *
+ *               spielen zu können.                                          *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void Logik(int iSchwierigkeitsgrad){
-    int k;
+    int k, iAbbrechen, iZeit;
     srand(time(NULL));
 
     switch(iSchwierigkeitsgrad){
-        case 1: k=30; break;
+        case 1: k=1; break;
         case 2: k=40; break;
         case 3: k=50; break;
     }
@@ -45,13 +62,27 @@ void Logik(int iSchwierigkeitsgrad){
         SudokuErstellen(k);
     }
 
-    SudokuSpielen();
+    iAbbrechen = SudokuSpielen();
+
+    if(iAbbrechen==0){
+        gesamtPunkteBerechnen();
+        iZeit = iZeitBerechnen();
+        schreibeErgebnisInDb(iSchwierigkeitsgrad, iZeit);
+        Bestenliste();
+        spiel.iAnz=0;
+        iZeitStartWert=-1;
+    }
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: SudokuErstellen()                                               *
- * Parameter: none                                                           *
- * RÃ¼ckgabewert: none                                                        *
+ * Parameter: int iSchwierigkeitsgrad                                        *
+ * Rückgabewert: none                                                        *
+ * Beschreibung: Erstellt ein Sudoku. Dazu gehören 4 Multidimensionale       *
+ *               Arrays: int iHilfsfelder[9][9][9];                          *
+ *                       int iSpiel[9][9];                                   *
+ *                       int iAnfangsfelder[9][9];                           *
+ *                       int iLoesung[9][9];                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void SudokuErstellen(int iSchwierigkeitsgrad){
     int i, j;
@@ -83,9 +114,10 @@ void SudokuErstellen(int iSchwierigkeitsgrad){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: SudokuSpielen()                                                 *
  * Parameter: none                                                           *
- * RÃ¼ckgabewert: none                                                        *
+ * Rückgabewert: int iAbbrechen                                              *
+ * Beschreibung: Regelt die Ein- und Ausgabe während des Spielens.           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-void SudokuSpielen(){
+int SudokuSpielen(){
     int iPositionX, iPositionY, iZahl, iAbbrechen=0;
     char cModus;
 
@@ -124,22 +156,21 @@ void SudokuSpielen(){
             exit(0);
         }
         else if(cModus== 'b'){
-            Bestenliste(1);
+            Bestenliste();
         }
 
         SudokuAusgeben();
     }while(!KomplettRichtigPruefen() && iAbbrechen==0);
 
-    if(iAbbrechen==0){
-        Bestenliste();
-    }
+    return iAbbrechen;
 
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: SudokuInitialisieren()                                          *
  * Parameter: none                                                           *
- * RÃ¼ckgabewert: none                                                        *
+ * Rückgabewert: none                                                        *
+ * Beschreibung: Setzt alle Felder der Arrays auf 0                          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void SudokuInitialisieren(){
     int i, j, k;
@@ -161,7 +192,8 @@ void SudokuInitialisieren(){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: ZufallszahlGenerieren()                                         *
  * Parameter: int iVon, int iBis                                             *
- * RÃ¼ckgabewert: int iZufallszahl                                            *
+ * Rückgabewert: int iZufallszahl                                            *
+ * Beschreibung: Generiert eine Zufallszahl in einem definierten Bereich     *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int ZufallszahlGenerieren(int iVon, int iBis){
     int iZufallszahl = rand()%(iBis+1-iVon)+iVon;
@@ -171,7 +203,9 @@ int ZufallszahlGenerieren(int iVon, int iBis){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: PositionSetzen()                                                *
  * Parameter: int iPositionY, int iPositionX                                 *
- * RÃ¼ckgabewert: none                                                        *
+ * Rückgabewert: none                                                        *
+ * Beschreibung: Setzt die Position, falls sie außerhalb des Spielfeldes     *
+ *               liegt, entsprechend der Werte neu.                          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
  void PositionSetzen(int *iPositionY, int *iPositionX){
         *iPositionY = (*iPositionY + (*iPositionX-(*iPositionX)%9)/9)%9;
@@ -181,7 +215,8 @@ int ZufallszahlGenerieren(int iVon, int iBis){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: LoesungGenerieren()                                             *
  * Parameter: int iPositionY, int iPositionX                                 *
- * RÃ¼ckgabewert: none                                                        *
+ * Rückgabewert: none                                                        *
+ * Beschreibung: Generiert einen Lösungsarray                                *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void LoesungGenerieren(int iPositionY, int iPositionX){
     int i, iZahl=ZufallszahlGenerieren(1,9);
@@ -209,7 +244,9 @@ void LoesungGenerieren(int iPositionY, int iPositionX){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: AnfangsfelderGenerieren()                                       *
  * Parameter: none                                                           *
- * RÃ¼ckgabewert: none                                                        *
+ * Rückgabewert: none                                                        *
+ * Beschreibung: Generiert den Anfangsfelderarray. Dazu muss zuvor der       *
+ *               Anfangsfelderarray gleich dem Lösungsarray gesetzt werden.  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void AnfangsfelderGenerieren(){
     int iPositionY = ZufallszahlGenerieren(0,8),
@@ -225,7 +262,8 @@ void AnfangsfelderGenerieren(){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: LoesungFinden()                                                 *
  * Parameter: int iPositionY, int iPositionX                                 *
- * RÃ¼ckgabewert: none                                                        *
+ * Rückgabewert: none                                                        *
+ * Beschreibung: Prüft den Anfangsfelderarray auf Eindeutigkeit der Lösung.  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void LoesungFinden(int iPositionY, int iPositionX){
     int i, j;
@@ -259,7 +297,9 @@ void LoesungFinden(int iPositionY, int iPositionX){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: ZahlAnPositionPruefen()                                         *
  * Parameter: int *iSudoku, int iPositionY, int iPositionX, int iZahl        *
- * RÃ¼ckgabewert: int iPruef                                                  *
+ * Rückgabewert: int iPruef                                                  *
+ * Beschreibung: Prüft, ob Zahl an bestimmter Position in bestimmten Array   *
+ *               nach Spielregeln gültig ist.                                *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int ZahlAnPositionPruefen(int *iSudoku, int iPositionY, int iPositionX, int iZahl){
     int i, j, iBlockY, iBlockX, iPruef;
@@ -303,7 +343,8 @@ int ZahlAnPositionPruefen(int *iSudoku, int iPositionY, int iPositionX, int iZah
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: KomplettPruefen()                                               *
  * Parameter: int *iPointer                                                  *
- * RÃ¼ckgabewert: int iPruef                                                  *
+ * Rückgabewert: int iPruef                                                  *
+ * Beschreibung: Prüft, ob alle Felder in Array ungleich 0 sind              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int KomplettPruefen(int *iPointer){
     int i, j, iPruef=0;
@@ -326,7 +367,9 @@ int KomplettPruefen(int *iPointer){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: KomplettRichtigPruefen()                                        *
  * Parameter: none                                                           *
- * RÃ¼ckgabewert: int iPruef                                                  *
+ * Rückgabewert: int iPruef                                                  *
+ * Beschreibung: Prüft, ob alle Felder des Spielarrays gleich dem            *
+ *               Lösungsarray sind.                                          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int KomplettRichtigPruefen(){
     int i, j, iPruef=0;
@@ -349,7 +392,8 @@ int KomplettRichtigPruefen(){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: SudokuAusgaben()                                                *
  * Parameter: none                                                           *
- * RÃ¼ckgabewert: none                                                        *
+ * Rückgabewert: none                                                        *
+ * Beschreibung: Gibt das Sudoku aus.                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void SudokuAusgeben(){
     int i, j, k, l, m, n, o;
@@ -687,7 +731,7 @@ void SudokuAusgeben(){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: KandidatenGenerieren()                                          *
  * Parameter: none                                                           *
- * RÃ¼ckgabewert: none                                                        *
+ * Rückgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void KandidatenGenerieren(){
     int i, j, k;
@@ -710,9 +754,11 @@ void KandidatenGenerieren(){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: ZahlEintragen()                                                 *
  * Parameter: int iPositionY, int iPositionX, int iZahl                      *
- * RÃ¼ckgabewert: int (0, 1 oder 2)                                           *
+ * Rückgabewert: none                                                        *
+ * Beschreibung: Trägt eine bestimmte Zahl an bestimmter Position ein.       *
+ *               Löscht außerdem Kandidaten nach Spielregeln.                *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-int ZahlEintragen(int iPositionY, int iPositionX, int iZahl){
+void ZahlEintragen(int iPositionY, int iPositionX, int iZahl){
     int i, j, iBlockY, iBlockX;
 
     if((double)(iPositionY)/3<=1){
@@ -753,7 +799,7 @@ int ZahlEintragen(int iPositionY, int iPositionX, int iZahl){
             }
         }
 
-        if(spiel.iLoesung[iPositionY-1][iPositionX-1]== iZahl){
+        if(spiel.iLoesung[iPositionY-1][iPositionX-1]==iZahl){
             punkteBerechnen(1);
         }else{
             punkteBerechnen(2);
@@ -765,7 +811,9 @@ int ZahlEintragen(int iPositionY, int iPositionX, int iZahl){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: LoesungEintragen()                                              *
  * Parameter: int iPositionY, int iPositionX                                 *
- * RÃ¼ckgabewert: int (0, 1)                                                  *
+ * Rückgabewert: int (0, 1)                                                  *
+ * Beschreibung: Trägt die richtige Zahl an bestimmter Position ein.         *
+ *               Löscht außerdem Kandidaten nach Spielregeln.                *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int LoesungEintragen(int iPositionY, int iPositionX){
     int i, j, iBlockY, iBlockX;
@@ -816,7 +864,9 @@ int LoesungEintragen(int iPositionY, int iPositionX){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: KandidatEintragenEntfernen()                                    *
  * Parameter: int iPositionY, int iPositionX, int iZahl                      *
- * RÃ¼ckgabewert: int (0 oder 1)                                              *
+ * Rückgabewert: int (0 oder 1)                                              *
+ * Beschreibung: Trägt bestimmten Kandidaten an bestimmter Position ein.     *
+ *               Eingabe von 0 "löscht" den Kandidaten wieder.               *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int KandidatEintragenEntfernen(int iPositionY, int iPositionX, int iZahl){
     if(spiel.iSpiel[iPositionY-1][iPositionX-1]==0){

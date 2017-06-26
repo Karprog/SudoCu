@@ -31,31 +31,23 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="BenutzerVonStdin.c">
+		<Unit filename="Benutzerverwaltung.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="BestenlisteLesenUnit.c">
+		<Unit filename="Benutzerverwaltung.h" />
+		<Unit filename="BestenlisteLesen.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="BestenlisteSchreibenUnit.c">
+		<Unit filename="BestenlisteLesen.h" />
+		<Unit filename="BestenlisteSchreiben.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="NutzerInDb.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="NutzerLesenVonDb.c">
-			<Option compilerVar="CC" />
-		</Unit>
+		<Unit filename="BestenlisteSchreiben.h" />
+		<Unit filename="LeseNutzer.h" />
 		<Unit filename="Punkte.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Punkte.h" />
-		<Unit filename="SuDoCu.depend" />
-		<Unit filename="SuDoCu.layout" />
-		<Unit filename="SudoCu.cbp" />
-		<Unit filename="Testmain.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="Zeit.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -66,6 +58,9 @@
 		</Unit>
 		<Unit filename="benutzerverwaltung.sqlite3" />
 		<Unit filename="frontend.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="leseNutzer.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="main.c">

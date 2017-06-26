@@ -7,7 +7,7 @@ int iLetzteZeit = 0;
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: Berechnet die Zeit seit dem Spielstart in Sekunden              *
  * Parameter: none                                                           *
- * Rückgabewert: int (Anzahl der Sekunden oder -1)                           *
+ * Rï¿½ckgabewert: int (Anzahl der Sekunden oder -1)                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int iZeitBerechnen(void){
     // Holt die jetzige Zeit

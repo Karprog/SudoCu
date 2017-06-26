@@ -7,7 +7,7 @@ int iGesamtPunkte = 0;
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: Berechnet die Punkte nach der jeweiligen Eingabe                *
  * Parameter: none                                                           *
- * Rückgabewert: none                                                        *
+ * Rï¿½ckgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void punkteBerechnen(int iEingabeCode){
     // Punkte vergeben, wenn die Zahl an der Stelle korrekt ist
@@ -23,7 +23,7 @@ void punkteBerechnen(int iEingabeCode){
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Funktion: Verrechnet die Punktzahl mit den abgezogenen Punkten            *
  * Parameter: none                                                           *
- * Rückgabewert: none                                                        *
+ * Rï¿½ckgabewert: none                                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void gesamtPunkteBerechnen(){
     iGesamtPunkte = iPunktzahl - iAbgezogenePunkte;
