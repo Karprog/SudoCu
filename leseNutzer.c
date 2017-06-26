@@ -34,8 +34,9 @@ char leseNutzerdatenVonDb(char* nutzername, char* passwort )
 
     if (rc == 0) {
         /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
-        sql = sqlite3_mprintf("SELECT id FROM nutzerdaten WHERE benutzername = '%s' AND passwort = '%s';",
-                            nutzername, passwort);
+        sql = sqlite3_mprintf("SELECT id FROM nutzerdaten WHERE benutzername ="\
+                              " '%s' AND passwort = '%s';",
+                              nutzername, passwort);
     }
     /*Ausführen der Query auf der Datenbank*/
     control = sqlite3_exec(db_handle, sql, callback, NULL, &errormsg);

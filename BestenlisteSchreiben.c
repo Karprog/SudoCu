@@ -31,9 +31,10 @@ int schreibeErgebnisInDb(int schwierigkeitsgrad, int zeit)
 
     /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
     sql = sqlite3_mprintf("INSERT INTO bestenliste (benutzerId, "\
-                          "schwierigkeitsgrad, punktzahl, zeit, punkteProZeit) "\
-                          "VALUES ('%i', '%i', '%i', '%i', '%.1f')",
-                        nutzerId, schwierigkeitsgrad, iGesamtPunkte, zeit, fPunkteProZeit);
+                          "schwierigkeitsgrad, punktzahl, zeit, punkteProZeit)"\
+                          " VALUES ('%i', '%i', '%i', '%i', '%.1f')",
+                        nutzerId, schwierigkeitsgrad, iGesamtPunkte, zeit,
+                        fPunkteProZeit);
 
     /*Ausführen der Query auf der Datenbank*/
     control = sqlite3_exec(db_handle, sql, NULL, NULL, &errormsg);

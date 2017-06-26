@@ -25,8 +25,9 @@ int mainNutzerVonDb(void)
 
     if (rc == 0) {
         /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
-        sql = sqlite3_mprintf("INSERT INTO nutzerdaten (benutzername, passwort) VALUES ('%s', '%s')",
-                            nutzername, passwort);
+        sql = sqlite3_mprintf("INSERT INTO nutzerdaten (benutzername, passwort"\
+                              ") VALUES ('%s', '%s')",
+                              nutzername, passwort);
     }
     else {
         printf("Es konnte keine Verbindung zur Datenbank aufgebaut werden.");

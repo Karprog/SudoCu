@@ -175,22 +175,22 @@
 	<string.h>
 	"sqlite3.h"
 
-1498205361 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\begrusungsbirldschirm.c
+1498465602 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\begrusungsbirldschirm.c
 	"begrusungsbildschirm.h"
 
-1498205361 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\begrusungsbildschirm.h
+1498465602 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\begrusungsbildschirm.h
 	<stdio.h>
 
-1498205384 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\benutzerverwaltung.c
+1498465602 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\benutzerverwaltung.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"sqlite3.h"
 
-1498205361 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\sqlite3.h
+1498465601 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\sqlite3.h
 	<stdarg.h>
 
-1498462288 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlisteschreiben.c
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlisteschreiben.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -199,7 +199,7 @@
 	"Punkte.h"
 	"sqlite3.h"
 
-1498224462 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlisteschreiben.h
+1498465601 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlisteschreiben.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -207,7 +207,7 @@
 	"LeseNutzer.h"
 	"sqlite3.h"
 
-1498462288 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\frontend.c
+1498466478 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\frontend.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -215,49 +215,47 @@
 	"BestenlisteSchreiben.h"
 	"LeseNutzer.h"
 
-1498223149 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlistelesen.h
+1498465601 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlistelesen.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"sqlite3.h"
 
-1498220532 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\lesenutzer.h
+1498465601 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\lesenutzer.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"sqlite3.h"
 
-1498221409 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\lesenutzer.c
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\lesenutzer.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"sqlite3.h"
 	"LeseNutzer.h"
 
-1498461548 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\main.c
+1498465838 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\main.c
 	<stdio.h>
 	<stdlib.h>
-	<time.h>
+	"Logik.h"
 	"Zeit.h"
-	"Punkte.h"
-	"LeseNutzer.h"
 
-1498205361 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\zeit.h
+1498465601 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\zeit.h
 	<stdio.h>
 	<time.h>
 
-1498205361 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\punkte.h
+1498465601 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\punkte.h
 	<stdio.h>
 
-1498205384 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\mainfile.c
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\mainfile.c
 	<stdio.h>
 	<stdlib.h>
 	"Zeit.h"
 
-1498205384 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\punkte.c
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\punkte.c
 	"Punkte.h"
 
-1498205361 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\sqlite3.c
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\sqlite3.c
 	<vxWorks.h>
 	<pthread.h>
 	"mingw.h"
@@ -314,10 +312,10 @@
 	<ctype.h>
 	<math.h>
 
-1498205384 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\zeit.c
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\zeit.c
 	"Zeit.h"
 
-1498223139 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlistelesen.c
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlistelesen.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -476,4 +474,47 @@
 	<stdlib.h>
 	"Logik.h"
 	"Zeit.h"
+
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\benutzervonstdin.c
+	<stdio.h>
+	<stdlib.h>
+
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlistelesenunit.c
+	<stdio.h>
+	<stdlib.h>
+
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\bestenlisteschreibenunit.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\nutzerindb.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\nutzerlesenvondb.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498465601 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\testmain.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498465601 c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\logik.h
+
+1498466365 source:c:\users\robin\documents\schule (ausbildung)\1. jahr - projekt\sudocu\logik.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Logik.h"
+	"Zeit.h"
+	"Punkte.h"
+	"LeseNutzer.h"
 

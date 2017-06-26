@@ -23,29 +23,36 @@ SUDOKU spiel;
  *               spielen zu können.                                          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void Logik(int iSchwierigkeitsgrad){
+    //Variablen
     int k, iAbbrechen, iZeit;
     srand(time(NULL));
 
+    //Fallunterscheidung
     switch(iSchwierigkeitsgrad){
-        case 1: k=1; break;
+        case 1: k=30; break;
         case 2: k=40; break;
         case 3: k=50; break;
     }
 
+    //Erstellung des Spielfeldes
+    //Solange bis nur eine Lösung
     while(spiel.iAnz!=1){
         SudokuErstellen(k);
     }
 
+    //Spiel starten
     iAbbrechen = SudokuSpielen();
 
+    //bei erfolgreich abgeschlossenem Spiel Bestenlisteneintrag
     if(iAbbrechen==0){
         gesamtPunkteBerechnen();
         iZeit = iZeitBerechnen();
         schreibeErgebnisInDb(iSchwierigkeitsgrad, iZeit);
         Bestenliste();
-        spiel.iAnz=0;
-        iZeitStartWert=-1;
     }
+
+    spiel.iAnz=0;
+    iZeitStartWert=-1;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -59,12 +66,14 @@ void Logik(int iSchwierigkeitsgrad){
  *                       int iLoesung[9][9];                                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void SudokuErstellen(int iSchwierigkeitsgrad){
+    //Variablen
     int i, j;
 
     SudokuInitialisieren();
 
     LoesungGenerieren(0, 0);
 
+    //Setze iAnfangsfelder = iLoesung
     for(i=0; i<9; i++){
         for(j=0; j<9; j++){
             spiel.iAnfangsfelder[i][j] = spiel.iLoesung[i][j];
@@ -77,6 +86,7 @@ void SudokuErstellen(int iSchwierigkeitsgrad){
 
     LoesungFinden(0, 0);
 
+    //Setze iSpiel = iAnfangsfelder
     for(i=0; i<9; i++){
         for(j=0; j<9; j++){
             spiel.iSpiel[i][j] = spiel.iAnfangsfelder[i][j];
@@ -92,6 +102,7 @@ void SudokuErstellen(int iSchwierigkeitsgrad){
  * Beschreibung: Regelt die Ein- und Ausgabe während des Spielens.           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int SudokuSpielen(){
+    //Variablen
     int iPositionX, iPositionY, iZahl, iAbbrechen=0;
     char cModus;
 
@@ -101,6 +112,7 @@ int SudokuSpielen(){
         printf("Was moechten Sie tun?");
         scanf("%c", &cModus);
 
+        //Fallunterscheidung
         if(cModus== '0' || cModus== '1' || cModus== '2'){
             printf("Bitte geben Sie PositionX ein:");
             scanf("%i", &iPositionX);
@@ -147,6 +159,7 @@ int SudokuSpielen(){
  * Beschreibung: Setzt alle Felder der Arrays auf 0                          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void SudokuInitialisieren(){
+    //Variablen
     int i, j, k;
 
     for(i=0; i<9; i++){
@@ -193,15 +206,19 @@ int ZufallszahlGenerieren(int iVon, int iBis){
  * Beschreibung: Generiert einen Lösungsarray                                *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void LoesungGenerieren(int iPositionY, int iPositionX){
+    //Variablen
     int i, iZahl=ZufallszahlGenerieren(1,9);
 
+    //Positionscheck
     PositionSetzen(&iPositionY, &iPositionX);
 
+    //Prüfung ob Zahl passt
     if(spiel.iLoesung[iPositionY][iPositionX]!=0){
         LoesungGenerieren(iPositionY, iPositionX+1);
     }else{
         for(i=0; i<9; i++){
-            if(ZahlAnPositionPruefen(&spiel.iLoesung, iPositionY, iPositionX, (iZahl+i)%9+1)){
+            if(ZahlAnPositionPruefen(&spiel.iLoesung, iPositionY, iPositionX,
+                                     (iZahl+i)%9+1)){
                 spiel.iLoesung[iPositionY][iPositionX] = (iZahl+i)%9+1;
                 //SudokuAusgeben();
                 if(KomplettPruefen(&spiel.iLoesung[0][0])==0){
@@ -223,9 +240,11 @@ void LoesungGenerieren(int iPositionY, int iPositionX){
  *               Anfangsfelderarray gleich dem Lösungsarray gesetzt werden.  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void AnfangsfelderGenerieren(){
+    //Variablen
     int iPositionY = ZufallszahlGenerieren(0,8),
         iPositionX = ZufallszahlGenerieren(0,8);
 
+    //Feld wird auf 0 gesetzt
     if(spiel.iAnfangsfelder[iPositionY][iPositionX]!=0){
         spiel.iAnfangsfelder[iPositionY][iPositionX] = 0;
     }else{
@@ -240,18 +259,23 @@ void AnfangsfelderGenerieren(){
  * Beschreibung: Prüft den Anfangsfelderarray auf Eindeutigkeit der Lösung.  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void LoesungFinden(int iPositionY, int iPositionX){
+    //Variablen
     int i, j;
 
+    //Positionscheck
     PositionSetzen(&iPositionY, &iPositionX);
 
+    //Prüfung ob Zahl passt
     if(spiel.iAnfangsfelder[iPositionY][iPositionX]!=0 && spiel.iAnz<2){
         LoesungFinden(iPositionY, iPositionX+1);
     }else{
         for(i=0; i<9; i++){
-            if(ZahlAnPositionPruefen(&spiel.iAnfangsfelder, iPositionY, iPositionX, i+1)){
+            if(ZahlAnPositionPruefen(&spiel.iAnfangsfelder, iPositionY,
+                                     iPositionX, i+1)){
                 spiel.iAnfangsfelder[iPositionY][iPositionX] = i+1;
                 //SudokuAusgeben();
-                if(KomplettPruefen(&spiel.iAnfangsfelder[0][0])==0 && spiel.iAnz<2){
+                if(KomplettPruefen(&spiel.iAnfangsfelder[0][0])==0 &&
+                                    spiel.iAnz<2){
                     LoesungFinden(iPositionY, iPositionX+1);
                 }else{
                     for(i=0; i<9; i++){
@@ -275,17 +299,21 @@ void LoesungFinden(int iPositionY, int iPositionX){
  * Beschreibung: Prüft, ob Zahl an bestimmter Position in bestimmten Array   *
  *               nach Spielregeln gültig ist.                                *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-int ZahlAnPositionPruefen(int *iSudoku, int iPositionY, int iPositionX, int iZahl){
+int ZahlAnPositionPruefen(int *iSudoku, int iPositionY, int iPositionX,
+                          int iZahl){
+    //Variablen
     int i, j, iBlockY, iBlockX, iPruef;
 
+    //Prüfung ob Zahl passt...
     if(*(iSudoku+(iPositionY*9)+iPositionX)==0){
         iPruef = 1;
         for(i=0; i<9; i++){
-            if(*(iSudoku+(iPositionY*9)+i)==iZahl ||
-               *(iSudoku+(i*9)+iPositionX)==iZahl ){
+            if(*(iSudoku+(iPositionY*9)+i)==iZahl || //...in Spalte
+               *(iSudoku+(i*9)+iPositionX)==iZahl ){ //...in Zeile
                 iPruef = 0;
             }
         }
+        //Erkennung des Blocks
         if((double)(iPositionY+1)/3<=1){
             iBlockY = 0;
         }else if((double)(iPositionY+1)/3<=2){
@@ -302,6 +330,7 @@ int ZahlAnPositionPruefen(int *iSudoku, int iPositionY, int iPositionX, int iZah
         }
         for(i=0; i<3; i++){
             for(j=0; j<3; j++){
+                //...in Block
                 if(*(iSudoku+(i+(3*iBlockY))*9+(j+(3*iBlockX)))==iZahl){
                     iPruef = 0;
                 }
@@ -321,8 +350,10 @@ int ZahlAnPositionPruefen(int *iSudoku, int iPositionY, int iPositionX, int iZah
  * Beschreibung: Prüft, ob alle Felder in Array ungleich 0 sind              *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int KomplettPruefen(int *iPointer){
+    //Variablen
     int i, j, iPruef=0;
 
+    //Prüft ob Felder != 0
     for(i=0; i<9; i++){
         for(j=0; j<9; j++){
             if(*(iPointer+(9*i)+j)!=0){
@@ -346,8 +377,10 @@ int KomplettPruefen(int *iPointer){
  *               Lösungsarray sind.                                          *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int KomplettRichtigPruefen(){
+    //Variablen
     int i, j, iPruef=0;
 
+    //Prüft ob iSpiel = iLoesung
     for(i=0; i<9; i++){
         for(j=0; j<9; j++){
             if(spiel.iSpiel[i][j] == spiel.iLoesung[i][j]){
@@ -370,6 +403,7 @@ int KomplettRichtigPruefen(){
  * Beschreibung: Gibt das Sudoku aus.                                        *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void SudokuAusgeben(){
+    //Variablen
     int i, j, k, l, m, n, o;
     int iZeit;
     int iMinuten;
@@ -379,6 +413,8 @@ void SudokuAusgeben(){
     char cStrongline[79];
     char cWeakline[79];
     char cEmptyline[79];
+
+    //Variablen setzen
 
     iZeit = iZeitBerechnen();
     iMinuten = iZeit/60;
@@ -706,15 +742,20 @@ void SudokuAusgeben(){
  * Funktion: KandidatenGenerieren()                                          *
  * Parameter: none                                                           *
  * Rückgabewert: none                                                        *
+ * Beschreibung: Generiert Kandidaten (und werden angezeigt)                 *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void KandidatenGenerieren(){
+    //Variablen
     int i, j, k;
 
     for(i=0; i<9; i++){
         for(j=0; j<9; j++){
             for(k=0; k<9; k++){
+                //Prüft ob Zahl passt
                 if(ZahlAnPositionPruefen(&spiel.iSpiel, i, j, k+1)){
+                    //Setzt Kandidaten
                     spiel.iHilfsfelder[i][j][k] = k+1;
+                    //Setzt Zeit hoch
                     iZeitStartWert = iZeitStartWert -5;
                 }else{
                     spiel.iHilfsfelder[i][j][k] = 0;
@@ -733,8 +774,10 @@ void KandidatenGenerieren(){
  *               Löscht außerdem Kandidaten nach Spielregeln.                *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 void ZahlEintragen(int iPositionY, int iPositionX, int iZahl){
+    //Variablen
     int i, j, iBlockY, iBlockX;
 
+    //Definiert Block
     if((double)(iPositionY)/3<=1){
         iBlockY = 0;
     }else if((double)(iPositionY)/3<=2){
@@ -750,7 +793,9 @@ void ZahlEintragen(int iPositionY, int iPositionX, int iZahl){
         iBlockX = 2;
     }
 
+    //Passt Kandidaten an
     if(spiel.iAnfangsfelder[iPositionY-1][iPositionX-1]==0){
+        //Setzt Zahl ein
         spiel.iSpiel[iPositionY-1][iPositionX-1] = iZahl;
 
         for(i=0; i<9; i++){
@@ -767,8 +812,10 @@ void ZahlEintragen(int iPositionY, int iPositionX, int iZahl){
         }
         for(i=0; i<3; i++){
             for(j=0; j<3; j++){
-                if(spiel.iHilfsfelder[i+(3*iBlockY)][j+(3*iBlockX)][iZahl-1]==iZahl){
-                    spiel.iHilfsfelder[i+(3*iBlockY)][j+(3*iBlockX)][iZahl-1] = 0;
+                if(spiel.iHilfsfelder[i+(3*iBlockY)]
+                                     [j+(3*iBlockX)][iZahl-1]==iZahl){
+                    spiel.iHilfsfelder[i+(3*iBlockY)]
+                                      [j+(3*iBlockX)][iZahl-1] = 0;
                 }
             }
         }
@@ -790,8 +837,10 @@ void ZahlEintragen(int iPositionY, int iPositionX, int iZahl){
  *               Löscht außerdem Kandidaten nach Spielregeln.                *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 int LoesungEintragen(int iPositionY, int iPositionX){
+    //Variablen
     int i, j, iBlockY, iBlockX;
 
+    //Definiert Block
     if((double)(iPositionY)/3<=1){
         iBlockY = 0;
     }else if((double)(iPositionY)/3<=2){
@@ -807,25 +856,49 @@ int LoesungEintragen(int iPositionY, int iPositionX){
         iBlockX = 2;
     }
 
+    //Passt Kadnidaten an
     if(spiel.iAnfangsfelder[iPositionY-1][iPositionX-1]==0){
-        spiel.iSpiel[iPositionY-1][iPositionX-1] = spiel.iLoesung[iPositionY-1][iPositionX-1];
+        //Setzt Lösung ein
+        spiel.iSpiel[iPositionY-1][iPositionX-1] = spiel.iLoesung[iPositionY-1]
+                                                                 [iPositionX-1];
 
         for(i=0; i<9; i++){
             spiel.iHilfsfelder[iPositionY-1][iPositionX-1][i] = 0;
         }
 
         for(i=0; i<9; i++){
-            if(spiel.iHilfsfelder[i][iPositionX-1][spiel.iLoesung[iPositionY-1][iPositionX-1]-1]==spiel.iLoesung[iPositionY-1][iPositionX-1]){
-                spiel.iHilfsfelder[i][iPositionX-1][spiel.iLoesung[iPositionY-1][iPositionX-1]-1] = 0;
+            if(spiel.iHilfsfelder[i]
+                                 [iPositionX-1]
+                                 [spiel.iLoesung[iPositionY-1]
+                                                [iPositionX-1]-1]==
+               spiel.iLoesung[iPositionY-1][iPositionX-1]){
+                spiel.iHilfsfelder[i]
+                                  [iPositionX-1]
+                                  [spiel.iLoesung[iPositionY-1]
+                                                 [iPositionX-1]-1] = 0;
             }
-            if(spiel.iHilfsfelder[iPositionY-1][i][spiel.iLoesung[iPositionY-1][iPositionX-1]-1]==spiel.iLoesung[iPositionY-1][iPositionX-1]){
-                spiel.iHilfsfelder[iPositionY-1][i][spiel.iLoesung[iPositionY-1][iPositionX-1]-1] = 0;
+            if(spiel.iHilfsfelder[iPositionY-1]
+                                 [i]
+                                 [spiel.iLoesung[iPositionY-1]
+                                                [iPositionX-1]-1]==
+               spiel.iLoesung[iPositionY-1][iPositionX-1]){
+                spiel.iHilfsfelder[iPositionY-1]
+                                  [i]
+                                  [spiel.iLoesung[iPositionY-1]
+                                                 [iPositionX-1]-1] = 0;
             }
         }
         for(i=0; i<3; i++){
             for(j=0; j<3; j++){
-                if(spiel.iHilfsfelder[i+(3*iBlockY)][j+(3*iBlockX)][spiel.iLoesung[iPositionY-1][iPositionX-1]-1]==spiel.iLoesung[iPositionY-1][iPositionX-1]){
-                    spiel.iHilfsfelder[i+(3*iBlockY)][j+(3*iBlockX)][spiel.iLoesung[iPositionY-1][iPositionX-1]-1] = 0;
+                if(spiel.iHilfsfelder[i+(3*iBlockY)]
+                                     [j+(3*iBlockX)]
+                                     [spiel.iLoesung[iPositionY-1]
+                                                    [iPositionX-1]-1]==
+                   spiel.iLoesung[iPositionY-1][iPositionX-1]){
+                    spiel.iHilfsfelder[i+(3*iBlockY)]
+                                      [j+(3*iBlockX)]
+                                      [spiel.iLoesung[iPositionY-1]
+                                                     [iPositionX-1]-1] = 0;
                 }
             }
         }
@@ -845,8 +918,12 @@ int LoesungEintragen(int iPositionY, int iPositionX){
 int KandidatEintragenEntfernen(int iPositionY, int iPositionX, int iZahl){
     if(spiel.iSpiel[iPositionY-1][iPositionX-1]==0){
         if(spiel.iHilfsfelder[iPositionY-1][iPositionX-1][iZahl-1]==0){
+            //Setzt Kandidat
             spiel.iHilfsfelder[iPositionY-1][iPositionX-1][iZahl-1] = iZahl;
-        }else if(spiel.iHilfsfelder[iPositionY-1][iPositionX-1][iZahl-1]==iZahl){
+        }else if(spiel.iHilfsfelder[iPositionY-1]
+                                   [iPositionX-1]
+                                   [iZahl-1]==iZahl){
+            //Löscht Kandidat
             spiel.iHilfsfelder[iPositionY-1][iPositionX-1][iZahl-1] = 0;
         }
         return 1;

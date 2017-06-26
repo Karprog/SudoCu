@@ -52,11 +52,13 @@ int selectBestenlisteNachSchwierigkeitsgrad(int schwierigkeitsgrad)
 
     rc = sqlite3_open(DATABASE_FILE, &db_handle);
 
-    sql = sqlite3_mprintf("SELECT nd.benutzername, bl.punkteProZeit, bl.punktzahl, bl.zeit, bl.schwierigkeitsgrad" \
-                          " FROM nutzerdaten nd JOIN bestenliste bl ON "\
-                          " nd.id = bl.benutzerId WHERE schwierigkeitsgrad = '%i'" \
-                          " ORDER BY bl.punkteProZeit DESC LIMIT 5",
-                          schwierigkeitsgrad);
+    sql = sqlite3_mprintf(
+      "SELECT nd.benutzername, bl.punkteProZeit, bl.punktzahl"\
+      ", bl.zeit, bl.schwierigkeitsgrad" \
+      " FROM nutzerdaten nd JOIN bestenliste bl ON "\
+      " nd.id = bl.benutzerId WHERE schwierigkeitsgrad = '%i'" \
+      " ORDER BY bl.punkteProZeit DESC LIMIT 5",
+      schwierigkeitsgrad);
 
     control = sqlite3_exec(db_handle, sql, callback, (void*)data , &errormsg);
 

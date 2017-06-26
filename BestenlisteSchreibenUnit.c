@@ -27,8 +27,10 @@ int mainBLS(void)
 
     if (rc == 0) {
         /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
-        sql = sqlite3_mprintf("INSERT INTO bestenliste (benutzerId, schwierigkeitsgrad, punktzahl, zeit) VALUES ('%s', '%s', '%s', '%s')",
-                            nutzerId, schwierigkeitsgrad, punktzahl, zeit);
+        sql = sqlite3_mprintf(
+          "INSERT INTO bestenliste (benutzerId, schwierigkeitsgrad, punktzahl,"\
+          " zeit) VALUES ('%s', '%s', '%s', '%s')",
+          nutzerId, schwierigkeitsgrad, punktzahl, zeit);
     }
     else {
         printf("Es konnte keine Verbindung zur Datenbank aufgebaut werden.");

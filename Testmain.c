@@ -24,7 +24,8 @@ int mainTestmain(void)
     rc = sqlite3_open(DATABASE_FILE, &db_handle);
 
     /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
-    sql = sqlite3_mprintf("INSERT INTO nutzerdaten (nutzername, passwort) VALUES ('%s', '%s')",
+    sql = sqlite3_mprintf("INSERT INTO nutzerdaten (nutzername, passwort) "\
+                          "VALUES ('%s', '%s')",
                           nutzername, passwort);
 
     printf(sql);

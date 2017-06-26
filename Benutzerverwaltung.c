@@ -22,7 +22,8 @@ int schreibeNutzerdatenInDb(char *nutzername, char *passwort)
 
     if (rc == 0) {
         /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
-        sql = sqlite3_mprintf("INSERT INTO nutzerdaten (benutzername, passwort) VALUES ('%s', '%s')",
+        sql = sqlite3_mprintf(
+        "INSERT INTO nutzerdaten (benutzername, passwort) VALUES ('%s', '%s')",
                             nutzername, passwort);
     }
     else {

@@ -417,14 +417,14 @@ int showRegistrieren()
  * Rückgabewert: char auswahl                                                *
  * Beschreibung: Diese Funktion stellt die Bestenliste dar                   *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-char showBestenliste()
+char Bestenliste()
 {
     //Variablen Deklaration
     char cAuswahl;
 
-    selectBestenlisteNachSchwierigkeitsgrad("Leicht");
-    selectBestenlisteNachSchwierigkeitsgrad("Mittel");
-    selectBestenlisteNachSchwierigkeitsgrad("Schwer");
+    selectBestenlisteNachSchwierigkeitsgrad(1);
+    selectBestenlisteNachSchwierigkeitsgrad(2);
+    selectBestenlisteNachSchwierigkeitsgrad(3);
 
     //Ausgabe des Menues
     system("cls");
@@ -434,27 +434,27 @@ char showBestenliste()
     printf("\n\n\n");
     printf("                         Leicht                                       Mittel                                       Schwer                         \n");
     printf("  ________________________________________________________________________________________________________________________________________________\n\n");
-    printf("                     %s|%s|%s|%s                                  %s|%s|%s|%s                                  %s|%s|%s|%s\n",
-           bestenliste.cLeicht[0][0], bestenliste.cLeicht[0][1], bestenliste.cLeicht[0][2], bestenliste.cLeicht[0][3],
-           bestenliste.cMittel[0][0], bestenliste.cMittel[0][1], bestenliste.cMittel[0][2], bestenliste.cMittel[0][3],
-           bestenliste.cSchwer[0][0], bestenliste.cSchwer[0][1], bestenliste.cSchwer[0][2], bestenliste.cSchwer[0][3]);
-   printf("                     %s|%s|%s|%s                                  %s|%s|%s|%s                                   %s|%s|%s|%s\n",
-           bestenliste.cLeicht[1][0], bestenliste.cLeicht[1][1], bestenliste.cLeicht[1][2], bestenliste.cLeicht[1][3],
-           bestenliste.cMittel[1][0], bestenliste.cMittel[1][1], bestenliste.cMittel[1][2], bestenliste.cMittel[1][3],
-           bestenliste.cSchwer[1][0], bestenliste.cSchwer[1][1], bestenliste.cSchwer[1][2], bestenliste.cSchwer[1][3]);
-   printf("                     %s|%s|%s|%s                                  %s|%s|%s|%s                                  %s|%s|%s|%s\n",
-           bestenliste.cLeicht[2][0], bestenliste.cLeicht[2][1], bestenliste.cLeicht[2][2], bestenliste.cLeicht[2][3],
-           bestenliste.cMittel[2][0], bestenliste.cMittel[2][1], bestenliste.cMittel[2][2], bestenliste.cMittel[2][3],
-           bestenliste.cSchwer[2][0], bestenliste.cSchwer[2][1], bestenliste.cSchwer[2][2], bestenliste.cSchwer[2][3]);
-   printf("                     %s|%s|%s|%s                                  %s|%s|%s|%s                                   %s|%s|%s|%s\n",
-           bestenliste.cLeicht[3][0], bestenliste.cLeicht[3][1], bestenliste.cLeicht[3][2], bestenliste.cLeicht[3][3],
-           bestenliste.cMittel[3][0], bestenliste.cMittel[3][1], bestenliste.cMittel[3][2], bestenliste.cMittel[3][3],
-           bestenliste.cSchwer[3][0], bestenliste.cSchwer[3][1], bestenliste.cSchwer[3][2], bestenliste.cSchwer[3][3]);
-   printf("                     %s|%s|%s|%s                                  %s|%s|%s|%s                                   %s|%s|%s|%s\n",
-           bestenliste.cLeicht[4][0], bestenliste.cLeicht[4][1], bestenliste.cLeicht[4][2], bestenliste.cLeicht[4][3],
-           bestenliste.cMittel[4][0], bestenliste.cMittel[4][1], bestenliste.cMittel[4][2], bestenliste.cMittel[4][3],
-           bestenliste.cSchwer[4][0], bestenliste.cSchwer[4][1], bestenliste.cSchwer[4][2], bestenliste.cSchwer[4][3]);
-    printf(" \n\n\n");
+    printf("      %15s | %4s | %4s | %4s       %15s | %4s | %4s | %4s       %15s | %4s | %4s | %4s\n",
+           leicht.platz[0].cName, leicht.platz[0].cPs, leicht.platz[0].cP, leicht.platz[0].cZ,
+           mittel.platz[0].cName, mittel.platz[0].cPs, mittel.platz[0].cP, mittel.platz[0].cZ,
+           schwer.platz[0].cName, schwer.platz[0].cPs, schwer.platz[0].cP, schwer.platz[0].cZ);
+    printf("      %15s | %4s | %4s | %4s       %15s | %4s | %4s | %4s       %15s | %4s | %4s | %4s\n",
+           leicht.platz[1].cName, leicht.platz[1].cPs, leicht.platz[1].cP, leicht.platz[1].cZ,
+           mittel.platz[1].cName, mittel.platz[1].cPs, mittel.platz[1].cP, mittel.platz[1].cZ,
+           schwer.platz[1].cName, schwer.platz[1].cPs, schwer.platz[1].cP, schwer.platz[1].cZ);
+    printf("      %15s | %4s | %4s | %4s       %15s | %4s | %4s | %4s       %15s | %4s | %4s | %4s\n",
+           leicht.platz[2].cName, leicht.platz[2].cPs, leicht.platz[2].cP, leicht.platz[2].cZ,
+           mittel.platz[2].cName, mittel.platz[2].cPs, mittel.platz[2].cP, mittel.platz[2].cZ,
+           schwer.platz[2].cName, schwer.platz[2].cPs, schwer.platz[2].cP, schwer.platz[2].cZ);
+    printf("      %15s | %4s | %4s | %4s       %15s | %4s | %4s | %4s       %15s | %4s | %4s | %4s\n",
+           leicht.platz[3].cName, leicht.platz[3].cPs, leicht.platz[3].cP, leicht.platz[3].cZ,
+           mittel.platz[3].cName, mittel.platz[3].cPs, mittel.platz[3].cP, mittel.platz[3].cZ,
+           schwer.platz[3].cName, schwer.platz[3].cPs, schwer.platz[3].cP, schwer.platz[3].cZ);
+    printf("      %15s | %4s | %4s | %4s       %15s | %4s | %4s | %4s       %15s | %4s | %4s | %4s\n",
+           leicht.platz[4].cName, leicht.platz[4].cPs, leicht.platz[4].cP, leicht.platz[4].cZ,
+           mittel.platz[4].cName, mittel.platz[4].cPs, mittel.platz[4].cP, mittel.platz[4].cZ,
+           schwer.platz[4].cName, schwer.platz[4].cPs, schwer.platz[4].cP, schwer.platz[4].cZ);
+        printf(" \n\n\n");
 
     //Bentzer eingabe für rückführung
     scanf("%c", &cAuswahl);

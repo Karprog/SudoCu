@@ -37,8 +37,9 @@ int mainNutzerInDb()
 
     if (rc == 0) {
         /*Query zum Schreiben der Nutzerdaten in die Datenbank*/
-        sql = sqlite3_mprintf("SELECT COUNT(*) FROM nutzerdaten WHERE benutzername = '%s' AND passwort = '%s';",
-                            nutzername, passwort);
+        sql = sqlite3_mprintf("SELECT COUNT(*) FROM nutzerdaten WHERE "\
+                              "benutzername = '%s' AND passwort = '%s';",
+                              nutzername, passwort);
     }
 
     /*Ausführen der Query auf der Datenbank*/
