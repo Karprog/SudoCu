@@ -5,7 +5,7 @@
  * Name:    SudoCu                                                           *
  * Version: 1.4                                                              *
  * Compiler:GNU                                                              *
- * Beschreibung:                                                              *
+ * Beschreibung:                                                             *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,17 +15,17 @@
 #include "LeseNutzer.h"
 
 //Funktions-Prototypen
-char Login();
-char Hauptmenue();
-char Bestenliste();
-char Schnellstart();
-char Schwierigkeit();
+char showLogin();
+char showHauptmenue();
+char showBestenliste();
+char showSchnellstart();
+char showSchwierigkeit();
 
 
-int Anmelden();
-int Registrieren();
+int showAnmelden();
+int showRegistrieren();
 
-//Globalevariable für den Nutzernnamen, welcher überall angezeigt wird.
+/*Globalevariable für den Nutzernnamen, welcher überall angezeigt wird. */
 char NUTZERNAME[40];
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -38,7 +38,7 @@ char NUTZERNAME[40];
 int mainFrontend()
 {
     //Aufruf des Hauptmenues
-    Hauptmenue();
+    showHauptmenue();
     return 0;
 }
 
@@ -50,7 +50,7 @@ int mainFrontend()
  * Beschreibung: Diese Funktion stellt das Grafische Hauptmenue dar und fängt*
  *               nutzereigaben ab, um sich in der Menue Struktur zu bewegen  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-char Hauptmenue()
+char showHauptmenue()
 {
         //Variablen Deklaration
         char cAuswahl;
@@ -63,17 +63,43 @@ char Hauptmenue()
             system("cls");
             printf("\n");
             printf(" SudoCu Version 4.4Alpha\n\n\n");
-            printf("\n\n                                                                                                                    Steuerung:  \n");
+            printf("\n\n                                                      "\
+                   "                                                          "\
+                   "   Steuerung:  \n");
             printf("\n");
-            printf(" Das Ziel ist es, die leeren                                                                                          0 = Kugelschreiber\n");
-            printf(" Zellen im Spielfeld mit den                                         SudoCo!                                          1 = Bleistift\n");
-            printf(" Ziffern 1 bis 9 wie folgt                                                                                            2 = Loesung Position\n");
-            printf(" auszufuellen.                                                                                                        3 = Kanidaten anzeigen\n");
-            printf("                                                                    a. Login                                         \n");
-            printf(" -In jeder Spalte kommt jede                                                                                          B = Bestenliste\n");
-            printf("  Zahl nur einmal vor                                            b. Schnellstart                                      X = Zurueck/Spiel abbrechen\n");
-            printf("                                                                                                                      Q = Schliessen\n");
-            printf(" -In jeder Zeile kommt jede                                       c. Bestenliste                                     \n");
+            printf(" Das Ziel ist es, die leeren                              "\
+                   "                                                          "\
+                   " 0 = Kugelschreiber\n");
+
+            printf(" Zellen im Spielfeld mit den                              "\
+                   "           SudoCu!                                        "\
+                   " 1 = Bleistift\n");
+
+            printf(" Ziffern 1 bis 9 wie folgt                                "\
+                   "                                                          "\
+                   " 2 = Loesung Position\n");
+
+            printf(" auszufuellen.                                            "\
+                   "                                                          "\
+                   " 3 = Kanidaten anzeigen\n");
+
+            printf("                                                          "\
+                   "          a. Login                                        "\
+                   "\n");
+            printf(" -In jeder Spalte kommt jede                              "\
+                   "                                                          "\
+                   " B = Bestenliste\n");
+
+            printf("  Zahl nur einmal vor                                     "\
+                   "       b. Schnellstart                                    "\
+                   " X = Zurueck/Spiel abbrechen\n");
+
+            printf("                                                          "\
+                   "                                                          "\
+                   " Q = Schliessen\n");
+            printf(" -In jeder Zeile kommt jede                               "\
+                   "        c. Bestenliste                                    "\
+                   " \n");
             printf("  Zahl nur einmal vor\n");
             printf("\n");
             printf(" -In jedem 3 x 3 Quadranten\n");
@@ -89,17 +115,17 @@ char Hauptmenue()
         {
             //Ruft das Menue für Anmeldung und Registrierung auf
             case 'a':
-                Login();
+                showLogin();
                 break;
             case 'b':
                 //Setzt den Nutzernamen für Gastspieler ohne Anmeldung
                 strcpy(NUTZERNAME,"Gast");
                 //öffnet das Schwierigkeitenmenue
-                Schwierigkeit();
+                showSchwierigkeit();
                 break;
             case 'c':
                 //zeigt die Bestenliste an
-                Bestenliste(0);
+                showBestenliste(0);
                 break;
             case 'x':
                 //beendet das Programm
@@ -109,7 +135,7 @@ char Hauptmenue()
                 break;
         }
 
-                //Die While Schleife lässt den nutzer solange eingaben machen bis ein
+        //Die While Schleife lässt den nutzer solange eingaben machen bis ein
         //gültiger Wert eingegeben wurde.
         }while (iBleib==0);
 
@@ -125,7 +151,7 @@ char Hauptmenue()
  * Beschreibung: Diese Funktion stellt das Login menue dar und fängt         *
  *               nutzereigaben ab, um sich in der Menue Struktur zu bewegen  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-char Login()
+char showLogin()
 {
     //Variablen Deklaration
     char iAuswahl;
@@ -142,15 +168,40 @@ char Login()
                "                                                            "\
                "Steuerung:  \n");
         printf("\n");
-        printf(" Das Ziel ist es, die leeren                                                                                          0 = Kugelschreiber\n");
-        printf(" Zellen im Spielfeld mit den                                          Login                                           1 = Bleistift\n");
-        printf(" Ziffern 1 bis 9 wie folgt                                                                                            2 = Loesung Position\n");
-        printf(" auszufuellen.                                                                                                        3 = Kanidaten anzeigen\n");
-        printf("                                                                    a. Anmelden                                      \n");
-        printf(" -In jeder Spalte kommt jede                                                                                          B = Bestenliste\n");
-        printf("  Zahl nur einmal vor                                             b. Registrieren                                     X = Zurueck/Spiel abbrechen\n");
-        printf("                                                                                                                      Q = Schliessen\n");
-        printf(" -In jeder Zeile kommt jede                                                                                          \n");
+        printf(" Das Ziel ist es, die leeren                                  "\
+               "                                                        0 = Ku"\
+               "gelschreiber\n");
+
+        printf(" Zellen im Spielfeld mit den                                  "\
+               "        Login                                           1 = Bl"\
+               "eistift\n");
+
+        printf(" Ziffern 1 bis 9 wie folgt                                    "\
+               "                                                        2 = Lo"\
+               "esung Position\n");
+
+        printf(" auszufuellen.                                                "\
+               "                                                        3 = Ka"\
+               "nidaten anzeigen\n");
+
+        printf("                                                              "\
+               "      a. Anmelden                                      \n");
+
+        printf(" -In jeder Spalte kommt jede                                  "\
+               "                                                        B = Be"\
+               "stenliste\n");
+
+        printf("  Zahl nur einmal vor                                         "\
+               "    b. Registrieren                                     X = Zu"\
+               "rueck/Spiel abbrechen\n");
+
+        printf("                                                              "\
+               "                                                        Q = Sc"\
+               "hliessen\n");
+
+        printf(" -In jeder Zeile kommt jede                                   "\
+               "                                                       \n");
+
         printf("  Zahl nur einmal vor\n");
         printf("\n");
         printf(" -In jedem 3 x 3 Quadranten\n");
@@ -168,11 +219,11 @@ char Login()
         {
             case 'a':
                 //Anmelden wenn ein Account vorhanden ist
-                Anmelden();
+                showAnmelden();
                 break;
             case 'b':
                 //Registrieren falls kein Account vorhanden ist
-               Registrieren();
+               showRegistrieren();
                 break;
             case 'x':
                 //Registrieren falls kein Account vorhanden ist
@@ -197,7 +248,7 @@ char Login()
  * Beschreibung: Diese Funktion stellt das Anmelde menue dar und ermöglicht  *
  *               das Anmelden.                                               *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-int Anmelden()
+int showAnmelden()
 {
     //Variablen Deklaration
     char cUsername[40];
@@ -211,17 +262,45 @@ int Anmelden()
         system("cls");
         printf("\n");
         printf(" SudoCu Version 4.4Alpha\n\n\n");
-        printf("\n\n                                                                                                                    Steuerung:  \n");
+        printf("\n\n                                                          "\
+               "                                                          Steu"\
+               "erung:  \n");
+
         printf("\n");
-        printf(" Das Ziel ist es, die leeren                                                                                          0 = Kugelschreiber\n");
-        printf(" Zellen im Spielfeld mit den                                         Anmeldung                                        1 = Bleistift\n");
-        printf(" Ziffern 1 bis 9 wie folgt                                                                                            2 = Loesung Position\n");
-        printf(" auszufuellen.                                                                                                        3 = Kanidaten anzeigen\n");
-        printf("                                                                 Geben Sie erst Name                                  \n");
-        printf(" -In jeder Spalte kommt jede                                                                                          B = Bestenliste\n");
-        printf("  Zahl nur einmal vor                                           und dann Passwort ein                                 X = Zurueck/Spiel abbrechen\n");
-        printf("                                                                                                                      Q = Schliessen\n");
-        printf(" -In jeder Zeile kommt jede                                                                                           \n");
+        printf(" Das Ziel ist es, die leeren                                  "\
+               "                                                        0 = Ku"\
+               "gelschreiber\n");
+
+        printf(" Zellen im Spielfeld mit den                                  "\
+               "       Anmeldung                                        1 = Bl"\
+               "eistift\n");
+
+        printf(" Ziffern 1 bis 9 wie folgt                                    "\
+               "                                                        2 = Lo"\
+               "esung Position\n");
+
+        printf(" auszufuellen.                                                "\
+               "                                                        3 = Ka"\
+               "nidaten anzeigen\n");
+
+        printf("                                                              "\
+               "   Geben Sie erst Name                                  \n");
+
+        printf(" -In jeder Spalte kommt jede                                  "\
+               "                                                        B = Be"\
+               "stenliste\n");
+
+        printf("  Zahl nur einmal vor                                         "\
+               "  und dann Passwort ein                                 X = Zu"\
+               "rueck/Spiel abbrechen\n");
+
+        printf("                                                              "\
+               "                                                        Q = Sc"\
+               "hliessen\n");
+
+        printf(" -In jeder Zeile kommt jede                                   "\
+               "                                                        \n");
+
         printf("  Zahl nur einmal vor\n");
         printf("\n");
         printf(" -In jedem 3 x 3 Quadranten\n");
@@ -246,7 +325,7 @@ int Anmelden()
     strcpy(NUTZERNAME, cUsername);
 
     //Weiterleitung in die Auswahl der Schwierigkeitsstufe
-    Schwierigkeit();
+    showSchwierigkeit();
 
     return 0;
 }
@@ -259,7 +338,7 @@ int Anmelden()
  * Beschreibung: Diese Funktion stellt das Anmelde menue dar und ermöglicht  *
  *               das Registrieren.                                           *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-int Registrieren()
+int showRegistrieren()
 {
     //Variablen Deklaration
     char cUsername[40];
@@ -270,17 +349,43 @@ int Registrieren()
     system("cls");
     printf("\n");
     printf(" SudoCu Version 4.4Alpha\n\n\n");
-    printf("\n\n                                                                                                                    Steuerung:  \n");
+    printf("\n\n                                                              "\
+           "                                                      Steuerung:  "\
+           "\n");
     printf("\n");
-    printf(" Das Ziel ist es, die leeren                                                                                          0 = Kugelschreiber\n");
-    printf(" Zellen im Spielfeld mit den                                        Registrierung                                     1 = Bleistift\n");
-    printf(" Ziffern 1 bis 9 wie folgt                                                                                            2 = Loesung Position\n");
-    printf(" auszufuellen.                                                                                                        3 = Kanidaten anzeigen\n");
-    printf("                                                                 Geben Sie erst Name                                  \n");
-    printf(" -In jeder Spalte kommt jede                                                                                          B = Bestenliste\n");
-    printf("  Zahl nur einmal vor                                           und dann Passwort ein                                 X = Zurueck/Spiel abbrechen\n");
-    printf("                                                                                                                      Q = Schliessen\n");
-    printf(" -In jeder Zeile kommt jede                                                                                           \n");
+    printf(" Das Ziel ist es, die leeren                                      "\
+           "                                                    0 = Kugelschre"\
+           "iber\n");
+
+    printf(" Zellen im Spielfeld mit den                                      "\
+           "  Registrierung                                     1 = Bleistift "\
+           "\n");
+
+    printf(" Ziffern 1 bis 9 wie folgt                                        "\
+           "                                                    2 = Loesung Po"\
+           "sition\n");
+
+    printf(" auszufuellen.                                                    "\
+           "                                                    3 = Kanidaten "\
+           "anzeigen\n");
+
+    printf("                                                                 G"\
+           "eben Sie erst Name                                  \n");
+
+    printf(" -In jeder Spalte kommt jede                                      "\
+           "                                                    B = Bestenlist"\
+           "e \n");
+    printf("  Zahl nur einmal vor                                           un"\
+           "d dann Passwort ein                                 X = Zurueck/Sp"\
+           "iel abbrechen\n");
+
+    printf("                                                                  "\
+           "                                                    Q = Schliessen"\
+           "\n");
+
+    printf(" -In jeder Zeile kommt jede                                       "\
+           "                                                    \n");
+
     printf("  Zahl nur einmal vor\n");
     printf("\n");
     printf(" -In jedem 3 x 3 Quadranten\n");
@@ -301,7 +406,7 @@ int Registrieren()
     schreibeNutzerdatenInDb(cUsername, cPasswort);
 
     // SPielstart
-    Schwierigkeit();
+    showSchwierigkeit();
     return 0;
 }
 
@@ -312,7 +417,7 @@ int Registrieren()
  * Rückgabewert: char auswahl                                                *
  * Beschreibung: Diese Funktion stellt die Bestenliste dar                   *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-char Bestenliste()
+char showBestenliste()
 {
     //Variablen Deklaration
     char cAuswahl;
@@ -366,7 +471,7 @@ char Bestenliste()
  * Rückgabewert: char auswahl                                                *
  * Beschreibung: Diese Funktion stellt die auswahl der Schwierigkeit dar     *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-char Schwierigkeit()
+char showSchwierigkeit()
 {
     //Variablen Deklaration
     char cAuswahl;
@@ -380,17 +485,45 @@ char Schwierigkeit()
         printf("\n");
         printf(" SudoCu Version 4.4Alpha\n\n\n");
         printf(" Benutzername: %s", NUTZERNAME);
-        printf("\n\n                                                                                                                    Steuerung:  \n");
+        printf("\n\n                                                          "\
+               "                                                          Steu"\
+               "erung:  \n");
+
         printf("\n");
-        printf(" Das Ziel ist es, die leeren                                                                                          0 = Kugelschreiber\n");
-        printf(" Zellen im Spielfeld mit den                                     Schwierigkeitsgrad                                   1 = Bleistift\n");
-        printf(" Ziffern 1 bis 9 wie folgt                                                                                            2 = Loesung Position\n");
-        printf(" auszufüllen.                                                                                                         3 = Kanidaten anzeigen\n");
-        printf("                                                                     1. Leicht                                        \n");
-        printf(" -In jeder Spalte kommt jede                                                                                          B = Bestenliste\n");
-        printf("  Zahl nur einmal vor                                                2. Mittel                                        X = Zurueck/Spiel abbrechen\n");
-        printf("                                                                                                                      Q = Schliessen\n");
-        printf(" -In jeder Zeile kommt jede                                          3. Schwer                                        \n");
+        printf(" Das Ziel ist es, die leeren                                  "\
+               "                                                        0 = Ku"\
+               "gelschreiber\n");
+
+        printf(" Zellen im Spielfeld mit den                                  "\
+               "   Schwierigkeitsgrad                                   1 = Bl"\
+               "eistift\n");
+
+        printf(" Ziffern 1 bis 9 wie folgt                                    "\
+               "                                                        2 = Lo"\
+               "esung Position\n");
+
+        printf(" auszufüllen.                                                 "\
+               "                                                        3 = Ka"\
+               "nidaten anzeigen\n");
+
+        printf("                                                              "\
+               "       1. Leicht                                        \n");
+
+        printf(" -In jeder Spalte kommt jede                                  "\
+               "                                                        B = Be"\
+               "stenliste\n");
+
+        printf("  Zahl nur einmal vor                                         "\
+               "       2. Mittel                                        X = Zu"\
+               "rueck/Spiel abbrechen\n");
+
+        printf("                                                              "\
+               "                                                        Q = Sc"\
+               "hliessen\n");
+
+        printf(" -In jeder Zeile kommt jede                                   "\
+               "       3. Schwer                                        \n");
+
         printf("  Zahl nur einmal vor\n");
         printf("\n");
         printf(" -In jedem 3 x 3 Quadranten\n");
