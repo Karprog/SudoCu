@@ -324,3 +324,156 @@
 	"sqlite3.h"
 	"BestenlisteLesen.h"
 
+1498463626 source:c:\users\anwender\downloads\sudocu-logik\sudocu-logik\begrusungsbirldschirm.c
+	"begrusungsbildschirm.h"
+
+1498463626 c:\users\anwender\downloads\sudocu-logik\sudocu-logik\begrusungsbildschirm.h
+	<stdio.h>
+
+1498463625 source:c:\users\anwender\downloads\sudocu-logik\sudocu-logik\benutzerverwaltung.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498463626 c:\users\anwender\downloads\sudocu-logik\sudocu-logik\sqlite3.h
+	<stdarg.h>
+
+1498463625 source:c:\users\anwender\downloads\sudocu-logik\sudocu-logik\bestenlistelesen.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+	"BestenlisteLesen.h"
+
+1498463626 c:\users\anwender\downloads\sudocu-logik\sudocu-logik\bestenlistelesen.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498463626 source:c:\users\anwender\downloads\sudocu-logik\sudocu-logik\bestenlisteschreiben.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"BestenlisteSchreiben.h"
+	"LeseNutzer.h"
+	"Punkte.h"
+	"sqlite3.h"
+
+1498463626 c:\users\anwender\downloads\sudocu-logik\sudocu-logik\bestenlisteschreiben.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"BestenlisteSchreiben.h"
+	"LeseNutzer.h"
+	"sqlite3.h"
+
+1498463626 c:\users\anwender\downloads\sudocu-logik\sudocu-logik\lesenutzer.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+
+1498463626 c:\users\anwender\downloads\sudocu-logik\sudocu-logik\punkte.h
+	<stdio.h>
+
+1498463626 source:c:\users\anwender\downloads\sudocu-logik\sudocu-logik\frontend.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"BestenlisteLesen.h"
+	"BestenlisteSchreiben.h"
+	"LeseNutzer.h"
+
+1498463626 source:c:\users\anwender\downloads\sudocu-logik\sudocu-logik\lesenutzer.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"sqlite3.h"
+	"LeseNutzer.h"
+
+1498463626 source:c:\users\anwender\downloads\sudocu-logik\sudocu-logik\punkte.c
+	"Punkte.h"
+
+1498463626 source:c:\users\anwender\downloads\sudocu-logik\sudocu-logik\sqlite3.c
+	<vxWorks.h>
+	<pthread.h>
+	"mingw.h"
+	"_mingw.h"
+	<stdarg.h>
+	"config.h"
+	<stdint.h>
+	<inttypes.h>
+	<intrin.h>
+	<cmnintrin.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	"windows.h"
+	<sys/cygwin.h>
+	<errno.h>
+	<process.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/ioctl.h>
+	<sys/file.h>
+	<sys/param.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	<tcl.h>
+	"sqlite3rtree.h"
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+	<ctype.h>
+	<math.h>
+
+1498463626 source:c:\users\anwender\downloads\sudocu-logik\sudocu-logik\zeit.c
+	"Zeit.h"
+
+1498463626 c:\users\anwender\downloads\sudocu-logik\sudocu-logik\zeit.h
+	<stdio.h>
+	<time.h>
+
+1498464526 source:c:\users\anwender\downloads\sudocu-logik\sudocu-logik\logik.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Logik.h"
+	"Zeit.h"
+	"Punkte.h"
+	"LeseNutzer.h"
+
+1498464097 c:\users\anwender\downloads\sudocu-logik\sudocu-logik\logik.h
+
+1498464515 source:c:\users\anwender\downloads\sudocu-logik\sudocu-logik\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Logik.h"
+	"Zeit.h"
+
